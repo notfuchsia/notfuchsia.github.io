@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Magenta</title>
-    <description>Magenta is a project devoted to music and art generation with machine intelligence. It is part of TensorFlow, an open source machine learning library.</description>
-    <link>https://magenta.tensorflow.org/</link>
-    <atom:link href="https://magenta.tensorflow.org/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 10 Oct 2016 19:53:00 +0000</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2016 19:53:00 +0000</lastBuildDate>
+    <title>Testing</title>
+    <description>Testing blog for editing.</description>
+    <link>https://douglaseck.github.io/blog/</link>
+    <atom:link href="https://douglaseck.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 13 Oct 2016 21:13:39 +0000</pubDate>
+    <lastBuildDate>Thu, 13 Oct 2016 21:13:39 +0000</lastBuildDate>
     <generator>Jekyll v3.1.4</generator>
     
       <item>
-        <title>Coconet: Counterpoint by Convolution</title>
-        <description>&lt;p&gt;Recently, WaveNet showed that we can generate music on the waveform level
+        <title>Coconet Counterpoint by Convolution</title>
+        <description>&lt;p&gt;[TODOs:
+* Rewrite abstract, background section
+* Prose to explain plot on generating from scratch
+* Closing: conclusion, future work …
+* Plot to explain blankout process
+* Sound clip to show rewriting multiple times improve the generated music
+]&lt;/p&gt;
+
+&lt;!--Recently, WaveNet showed that we can generate music on the waveform level
 sample by sample, and also time travel from romantic nocturnes to atonal
 bombastic mysticism in seconds.  Surprisingly, this was achieved not by RNNs,
 but CNNs, demonstrating that they can also successfully capture short and long
-term structure in sequential data such as speech and music audio.&lt;/p&gt;
+term structure in sequential data such as speech and music audio.--&gt;
 
-&lt;p&gt;Here, we introduce, CocoNet, where we use convolutions to model counterpoint
+&lt;!--Here, we introduce, CoCoNet, where we use convolutions to model counterpoint
 in music on the symbolic level, treating music as multiple simultaneous
 sequences.  We aim to generate music with a sense of flow, phrasing and
 coherence that spans over a minute by conditioning on the long-term structure of
@@ -25,9 +33,7 @@ existing Bach chorales, by rewriting them voice by voice until all parts are
 generated.  We frame this music generation problem as an inpainting task, where
 we (learn to) generate by conditioning on arbitrary context.  This frees us from
 needing to generate in a chronological order (such as in RNNs), which can be too
-constraining for symbolic music generation.&lt;/p&gt;
-
-&lt;!--more--&gt;
+constraining for symbolic music generation.  --&gt;
 
 &lt;!--Here, we zoom out and then zoom in to music in a different way.  We zoom out
 because we&#39;re looking at music from the symbolic level where we already have
@@ -35,23 +41,23 @@ notes, not just the waveforms.  We&#39;re zooming in because we&#39;re not treat
 music as a 1D sequence but the multiple simultaneous instrumental/vocal lines
 that make up a sequence. --&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;how did we come about thinking of music generation as an inpainting model&lt;/li&gt;
-  &lt;li&gt;tight interrelationships between voices&lt;/li&gt;
-&lt;/ul&gt;
+&lt;!--We introduce a method for music score generation using deep convolutional
+inpainting.--&gt;
 
-&lt;p&gt;TL;DR Music is often modeled as a sequence of events that is generated
-chronologically from left to right.  In this work, we focus on polyphonic music
-and represent each instrumental or vocal line as an individual sequence of
-notes, similar to how an image consists of separate RBG channels.  We introduce
-Coconet, to perform counterpoint by convolution.  We train this modelWe frame
-this problem as an inpainting task, approach music as consisting of multiple
-Here, we introduce CoCoNet, that allows us to generate in any order.  It can
-also generate by rewriting existing music and itself again and again.&lt;/p&gt;
-
-&lt;p&gt;break down the generation process&lt;/p&gt;
-
-&lt;p&gt;that allows us to generate in any order generated from left to right.&lt;/p&gt;
+&lt;p&gt;Previously, music was often modeled sequentially and assumed to be generated
+from left to right.  In this work, we frame music generation as an inpainting
+task, where models are trained by predicting fill-ins for randomly blanked out
+scores.  Blank outs within voices, across voices, and across time allow the
+model to learn conditional distributions that capture the interdependencies
+necessary to compose counterpoints.  This allows models to learn conditional
+distributions beyond chronological ones and thus allowing the model to generate
+in any order.  We introduce, Coconet, that composes counterpoint through
+convolution.  It can generate new pieces by rewriting existing pieces voice by
+voice, or it can generate from scratch, by writing counterpoint against itself,
+and then rewriting itself over and over again, akin to Gibbs sampling.  In this
+blog, we’ll highlight some generated examples and give a walkthrough of how the
+model generates step by step to gain some insight on how the model thinks about
+music.&lt;/p&gt;
 
 &lt;h2 id=&quot;lets-start-with-a-turing-test--a-nameforwardsamplea&quot;&gt;Let’s start with a ‘Turing’ test  &lt;a name=&quot;forwardSample&quot;&gt;&lt;/a&gt;&lt;/h2&gt;
 
@@ -65,8 +71,9 @@ machine or not.  But I&#39;ll be releasing my code on Magenta&#39;s
 interested. --&gt;
 
 &lt;iframe width=&quot;300&quot; height=&quot;200&quot; src=&quot;https://www.youtube.com/embed/VYTI7XbqC4Y&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;[TODO: the forward generation example is cut off at the end.]&lt;/p&gt;
-&lt;iframe width=&quot;300&quot; height=&quot;200&quot; src=&quot;https://www.youtube.com/embed/JBVGeZuE5gk&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;[TODO: the forward generation example is cut off at the end.]  &amp;lt;iframe
+width=&quot;300&quot; height=&quot;200&quot; src=&quot;https://www.youtube.com/embed/JBVGeZuE5gk&quot;
+frameborder=&quot;0&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
 
 &lt;!--### How did we encode the music and what are the implications on how the
 music can be modeled and generated?  Since there are multiple melodic lines
@@ -83,7 +90,6 @@ first give a glimpse of the particular procedure we used to generate the excerpt
 you heard above.  --&gt;
 
 &lt;h3 id=&quot;how-was-the-excerpt-generated--through-rewriting&quot;&gt;How was the excerpt generated?  Through rewriting.&lt;/h3&gt;
-
 &lt;p&gt;The Coconet chorale you heard above was generated by rewriting an existing Bach
 chorale voice by voice.  The generation process starts by randomly picking a
 voice to blank out.  Then, the model generates that voice sequentially from left
@@ -165,17 +171,13 @@ at each time step and model how well different pitches go together, they augment
 the prediction layer of an RNN by replacing the softmax with a Restricted
 Boltzmann Machine (RBM).&lt;/p&gt;
 
-&lt;h3 id=&quot;the-problem-of-forward-conditioning-and-generation&quot;&gt;The problem of forward conditioning and generation&lt;/h3&gt;
+&lt;h3 id=&quot;the-problem-of-forward-conditioning-and-generation-another-challenge-in&quot;&gt;The problem of forward conditioning and generation Another challenge in&lt;/h3&gt;
+&lt;p&gt;adapting language models for modeling music is that they often assume a
+chronological ordering when factorizing the joint distribution over a sequence
+$\mathbf{x}$, where $x_t$ is a categorical variable for the pitch it takes on at
+time step $t$, and $T$ being the length of the sequence.&lt;/p&gt;
 
-&lt;p&gt;Another challenge in adapting language models for modeling music is that they
-often assume a chronological ordering when factorizing the joint distribution
-over a sequence $\mathbf{x}$, where $x_t$ is a categorical variable for the
-pitch it takes on at time step $t$, and $T$ being the length of the sequence.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{align}
-p(\mathbf{x}) &amp;=  \prod^T_{t=1}p(x_t|x_1, ..., x_{t-1})
-\end{align} %]]&gt;&lt;/script&gt;
+&lt;center&gt;$p(\mathbf{x}) =  \prod^T_{t=1}p(x_t|x_1, ..., x_{t-1})$ &lt;/center&gt;
 
 &lt;p&gt;This means the current timestep is only conditioned on previous timesteps,
 theoretically all of them.  This poses a serious constraint on generation
@@ -188,29 +190,30 @@ not just sample forward in an unconstrained fashion, dynamic programming can be
 expansive, greedy search is non-ideal for constructing long sequences, beam
 search could be a heuristic to try out.&lt;/p&gt;
 
-&lt;p&gt;[TODO: Mention accumulation of error here or later when we describe how we
-sample? Probably the later so that it’s less abstract.]&lt;/p&gt;
+&lt;p&gt;[TODO: Mention accumulation of error here or later when we describe how we sample? Probably the later so that it’s less abstract.]&lt;/p&gt;
 
-&lt;h2 id=&quot;modeling-music-generation-as-an-inpainting-task-how-can-we-generate-in-a-way&quot;&gt;Modeling music generation as an inpainting task How can we generate in a way&lt;/h2&gt;
-&lt;p&gt;that accounts for everything that’s already been written in a score?  Better
-yet, how can we train a model to do this instead of trying to achieve this
-post-hoc.  This is our goal.  We want to build a model that can fill in any
-missing parts given arbitrary context.  This is the task of inpainting, which
-was first introduced by &lt;a href=&quot;context-encoder&quot;&gt;Pathak et al.&lt;/a&gt; this year in the
-context of image generation, where random parts of an image are blanked out and
-the model learns to reconstruct what could have been there.  This setup can be
-very powerful because during training each time we randomly blank out a part, we
-are asking the model to construct features that would allow it to predict the
-missing parts given the existing context.  These could be local edges that help
-predict surrounding pixels or semantic features when the blank outs and context
-are further away.  And indeed this approach to modeling has been shown to learn
-features that yield competitive and better results in a number of image
-classification, detection and segmentation tasks [Pathak 2016].  When applied to
-sequence generation such as music, we can think of the model learning both
-forward conditionals and many more in different directions because how we blank
-out the input determines what conditional distributions the model is learning.
-For example, if we blanked out timesteps $t$ and $t+1$ in the middle of a
-sequences, then we are learning the following condition distribution.&lt;/p&gt;
+&lt;h2 id=&quot;modeling-music-generation-as-an-inpainting-task&quot;&gt;Modeling music generation as an inpainting task&lt;/h2&gt;
+
+&lt;p&gt;How can we generate in a way that accounts for everything that’s already been
+written in a score?  Better yet, how can we train a model to do this instead of
+trying to achieve this post-hoc.  This is our goal.  We want to build a model
+that can fill in any missing parts given arbitrary context.  This is the task of
+inpainting, which was first introduced by &lt;a href=&quot;context-encoder&quot;&gt;Pathak et al.&lt;/a&gt; this
+year in the context of image generation, where random parts of an image are
+blanked out and the model learns to reconstruct what could have been there.
+This setup can be very powerful because during training each time we randomly
+blank out a part, we are asking the model to construct features that would allow
+it to predict the missing parts given the existing context.  These could be
+local edges that help predict surrounding pixels or semantic features when the
+blank outs and context are further away.  And indeed this approach to modeling
+has been shown to learn features that yield competitive and better results in a
+number of image classification, detection and segmentation tasks [Pathak 2016].
+When applied to sequence generation such as music, we can think of the model
+learning both forward conditionals and many more in different directions because
+how we blank out the input determines what conditional distributions the model
+is learning.  For example, if we blanked out timesteps $t$ and $t+1$ in the
+middle of a sequences, then we are learning the following condition
+distribution.&lt;/p&gt;
 
 &lt;center&gt;$p(x_t, x_{t+1}| x_1, …, x_{t-1}, x_{t+2}, …, x_{T})$&lt;/center&gt;
 
@@ -263,8 +266,9 @@ assume that each voice is now monophonic, we can model predictions as softmaxes
 across pitch.  Also for generation, we can easily condition on an incomplete
 score that has voices missing for some timesteps.&lt;/p&gt;
 
-&lt;p&gt;####Using masks to indicate which time steps to fill in
-So how does the model know which time steps on which instruments were blanked
+&lt;p&gt;####Using masks to indicate which time steps to fill in&lt;/p&gt;
+
+&lt;p&gt;So how does the model know which time steps on which instruments were blanked
 out and needs to be restored?  Each time step of an instrument $x_t^k$ has an
 accompanying binary mask $m_t^k$ that uses 1 to indicate “please figure out
 which pitch should be played here” and 0 to indicate “nothing to be done there”.
@@ -275,8 +279,9 @@ is the following:&lt;/p&gt;
 
 &lt;center&gt;$P(x_t^k | \mathbf{X} (1-\mathbf{M}), \mathbf{M})$&lt;/center&gt;
 
-&lt;p&gt;####Training data: blanking out Bach chorales to teach the model counterpoint
-We’re starting with four-part Bach chorales.  We set up the training data by
+&lt;p&gt;####Training data: blanking out Bach chorales to teach the model counterpoint&lt;/p&gt;
+
+&lt;p&gt;We’re starting with four-part Bach chorales.  We set up the training data by
 cropping pieces of four measures, and for each crop we randomly blank out 4
 measure-long patches on any of the SATB parts.  When these blank outs overlap in
 time, there could be one to three voices present, and the model is forced to
@@ -296,7 +301,37 @@ a few beats or it could be a phrase or actually a section.  One kind of
 elaboration could be starting with the skeleton of a chord progression and then
 the task is to expand the chords into full-fledged music of a certain style.&lt;/p&gt;
 
-&lt;h3 id=&quot;todo-how-does-the-model-think-about-music&quot;&gt;[TODO] How does the model think about music?&lt;/h3&gt;
+&lt;h3 id=&quot;todo-lets-see-coconet-in-action&quot;&gt;[TODO] Let’s see Coconet in action!&lt;/h3&gt;
+
+&lt;p&gt;Let’s walk through an example to see how Coconet generates from scratch.  Here
+we asked the model to generate two measures of music in the style of four-part
+Bach chorales.  Starting with a blank score, the model adds notes one by one.
+At every step, the model predicts for each cell in the piano roll, how likely is
+it for this pitch to be part of the score given all the other notes that are
+already on the score.  The plots below highlight some of the interesting turns
+in the sequence of predictions. Each plot is a grayscale heatmap on a piano roll
+showing its softmax predictive distribution for each timestep based on what was
+already generated, shown in solid magenta colors.  The magenta box with cyan
+border shows the most recently generated note, while the empty cyan box points
+to the pitch that has just been sampled from the softmax.  On the heatmap
+spectrum, the black end means the model is very confident given what was
+composed so far there should be a note there, while white means absolutely not.
+Grey can be very interesting because it reveals the model considering multiple
+alternatives.&lt;/p&gt;
+
+&lt;p&gt;Step 1: What are the chances the first sampled pitch is a C?&lt;/p&gt;
+
+&lt;p&gt;Step 2: Given the high C, we see the adjacent timesteps become black because
+notes don’t just pop in and out but usually stay for a certain duration.  Also
+we see grey patches approaching this high-C from above and be fan into this
+high-C while the model is wondering if we should approach this generated note
+from above or below.  And the dice happened to choose the G from below.&lt;/p&gt;
+
+&lt;p&gt;Step 16:
+Step 17:&lt;/p&gt;
+
+&lt;p&gt;Overall for pitch For pitch, the model happen to generate in the range of G4
+(midi pitch 67) to E5 (midi pitch 88) which is a&lt;/p&gt;
 
 &lt;p&gt;A series of plots here to show how the model starts with an empty canvas and
 adds notes to it.
@@ -305,7 +340,7 @@ adds notes to it.
 - in what musical context is it high entropy, and which is it low, is there
   something we can learn beyond confirming basic music theory?&lt;/p&gt;
 
-&lt;p&gt;Let’s look at what the model is predicting at each step.  The advantage of this
+&lt;p&gt;Let’s look at what the model is predicting at each step. The advantage of this
 model is that it always returns predictions over the entire piano roll, not just
 the next time step.  This allows us to see a lot of structure in the prediction
 and debug which musical relationships the model is doing well on and which it’s
@@ -314,6 +349,10 @@ missing.&lt;/p&gt;
 &lt;p&gt;Let’s walk through an example of a short segment of counterpoint is generated
 from scratch by the model.  That means we’re neither conditioning on some
 existing piece nor seeding it with some initial music.&lt;/p&gt;
+
+&lt;p&gt;[TODO: increase fontsize for title]&lt;/p&gt;
+
+&lt;p&gt;storyboard-generating_from_scratch.png&lt;/p&gt;
 
 &lt;h3 id=&quot;todo-hear-the-rewriting-getting-better&quot;&gt;[TODO] Hear the rewriting getting better?&lt;/h3&gt;
 
@@ -325,7 +364,7 @@ predict the next.  This allows the prediction of the current step to be
 conditioned on previous predictions as oppose to making independent predictions.
 This is how RNNs naturally generate, but this procedure is not limited to RNNs
 because what it requires is that the conditionals can form a chain.  For example
-[WaveNet] uses CNNs to model its forward conditionals, and generates waveforms
+&lt;a href=&quot;http://arxiv.org/abs/1609.03499&quot;&gt;WaveNet&lt;/a&gt; uses CNNs to model its forward conditionals, and generates waveforms
 sample by sample in chronological order.  This way of sampling is also not
 limited to objects that are inherently sequential.  For example,
 &lt;a href=&quot;pixelcnn&quot;&gt;PixelCNN&lt;/a&gt; generates 2D images row by row and within each row pixel by
@@ -374,48 +413,24 @@ inpainting model to generate that voice conditioned on the others.  We thought
 we take that a step further by taking all the voices out one by one, so that at
 the end we have a brand new piece. --&gt;
 
-&lt;!--So more concretely the generation story goes like this: we start with a
-4-part Bach chorale, we blank out one voice, ask the model to fill it back in.
-The model performs inpainting for this voice by generating its time steps in
-random order, where at each time step the generated is fed back into the model.
-When we&#39;re done with this voice, we blank out another one, and fill it back in
-by conditioning now on two original parts from Bach and one from our model.  Do
-this until all voices are from our model. --&gt;
+&lt;!--So more concretely the generation story goes like this:  we start with a 4-part Bach chorale, we blank out one voice, ask the model to fill it back in.  The model performs inpainting for this voice by generating its time steps in random order, where at each time step the generated is fed back into the model.  When we&#39;re done with this voice, we blank out another one, and fill it back in by conditioning now on two original parts from Bach and one from our model.  Do this until all voices are from our model. --&gt;
 
 &lt;iframe width=&quot;300&quot; height=&quot;200&quot; src=&quot;https://www.youtube.com/embed/4P9R8QwvUVU&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;For comparison, this is the forward generated excerpt from the beginning of this
-blog.  &amp;lt;iframe width=&quot;300&quot; height=&quot;200&quot;
-src=&quot;https://www.youtube.com/embed/JBVGeZuE5gk&quot; frameborder=&quot;0&quot;
-allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/p&gt;
+&lt;p&gt;For comparison, this is the forward generated excerpt from the beginning of this blog.&lt;/p&gt;
+&lt;iframe width=&quot;300&quot; height=&quot;200&quot; src=&quot;https://www.youtube.com/embed/JBVGeZuE5gk&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;###So was the model successful?&lt;/p&gt;
-
-&lt;p&gt;[TODO: comparison to forward generation, still coherent, a lot freer, even 
-though it was generated out of order, it still resolves dissonances…]&lt;/p&gt;
-
-&lt;p&gt;The model seems to have mastered counterpoint quite well.  We’ll provide more
-analysis in our upcoming arXiv paper.  For now, the overall impression is that
-it’s able to work out voice leading, knows what harmonic intervals to prefer and
-how to resolve dissonances.  It keeps the music flowing, with some voices moving
-faster at times and others more sustained.  The melody carries an arch.  There’s
-nice surprises that makes me want to listen to it again to figure it out.  It
-knows the key and even concludes on a Picardy third at the end! You can imagine
-how excited we were when we heard that from our model!
+&lt;p&gt;###So was the model successful?
+[TODO: comparison to forward generation, still coherent, a lot freer, even though it was generated out of order, it still resolves dissonances…]
+The model seems to have mastered counterpoint quite well.  We’ll provide more analysis in our upcoming arXiv paper.  For now, the overall impression is that it’s able to work out voice leading, knows what harmonic intervals to prefer and how to resolve dissonances.  It keeps the music flowing, with some voices moving faster at times and others more sustained.  The melody carries an arch.  There’s nice surprises that makes me want to listen to it again to figure it out.  It knows the key and even concludes on a Picardy third at the end! You can imagine how excited we were when we heard that from our model!
 &lt;!--Yes, that means the excerpt on the right was generated by our inpainting model.--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;todoconclusions&quot;&gt;[TODO]Conclusions&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;in what way better?&lt;/li&gt;
-  &lt;li&gt;advantage of generating in a random order, future work, explore how to figure
-out what ordering is better&lt;/li&gt;
-  &lt;li&gt;generation procedure of rewriting, allowing the model to condition on an
-existing pieces structure..abstract and long-term structure, such as chord
-progression and arch.  Our approach can be used for conditioned music generation
-such as completion of a partial score or variation on existing works. Unlike
-prior works in music generation, our approach is not constrained to producing
-notes in chronological order, and suffers much less from the accumulation of
-errors characteristic of chronological models.&lt;/li&gt;
+  &lt;li&gt;advantage of generating in a random order, future work, explore how to figure out what ordering is better&lt;/li&gt;
+  &lt;li&gt;generation procedure of rewriting, allowing the model to condition on an existing pieces structure..abstract and long-term structure, such as chord progression and arch.
+Our approach can be used for conditioned music generation such as completion of a partial score or variation on existing works. Unlike prior works in music generation, our approach is not constrained to producing notes in chronological order, and suffers much less from the accumulation of errors characteristic of chronological models.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;todofuture-work&quot;&gt;[TODO]Future work&lt;/h2&gt;
@@ -423,23 +438,15 @@ errors characteristic of chronological models.&lt;/li&gt;
 Understanding what features were learned…
 Model longer term structure&lt;/p&gt;
 
-&lt;p&gt;##Acknowledgements
-Last by not least, this work was carried out with collaborators on the
-&lt;a href=&quot;magenta&quot;&gt;Magenta&lt;/a&gt; team in &lt;a href=&quot;brain&quot;&gt;Google Brain&lt;/a&gt;, including fellow intern
-&lt;a href=&quot;cooijmans&quot;&gt;Tim Cooijmans&lt;/a&gt;, my summer host &lt;a href=&quot;adam&quot;&gt;Adam Roberts&lt;/a&gt; and my super
-host &lt;a href=&quot;doug&quot;&gt;Douglas Eck&lt;/a&gt;.  Special thanks to Jason Freidenfelds for his insight
-during my practice talk for this work.&lt;/p&gt;
+&lt;p&gt;##Acknowledgement
+Last by not least, this work was carried out with collaborators on the &lt;a href=&quot;magenta&quot;&gt;Magenta&lt;/a&gt; team in &lt;a href=&quot;brain&quot;&gt;Google Brain&lt;/a&gt;, including fellow intern &lt;a href=&quot;cooijmans&quot;&gt;Tim Cooijmans&lt;/a&gt;, my summer host &lt;a href=&quot;adam&quot;&gt;Adam Roberts&lt;/a&gt; and my super host &lt;a href=&quot;doug&quot;&gt;Douglas Eck&lt;/a&gt;.  Special thanks to Jason Freidenfelds for his insight during my practice talk for this work.&lt;/p&gt;
 
-&lt;p&gt;Sign up for our &lt;a href=&quot;magenta-list&quot;&gt;mailing list&lt;/a&gt; to stayed tuned on upcoming arXiv
-paper.  Our models are implemented in &lt;a href=&quot;tensorflow&quot;&gt;Tensorflow&lt;/a&gt; and will released
-soon on Magenta’s &lt;a href=&quot;magenta-github&quot;&gt;github&lt;/a&gt;.  Thanks for listening!&lt;/p&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
+&lt;p&gt;Sign up for our &lt;a href=&quot;magenta-list&quot;&gt;mailing list&lt;/a&gt; to stayed tuned on upcoming arXiv paper.  Our models are implemented in &lt;a href=&quot;tensorflow&quot;&gt;Tensorflow&lt;/a&gt; and will released soon on Magenta’s &lt;a href=&quot;magenta-github&quot;&gt;github&lt;/a&gt;.  Thanks for listening!&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 10 Oct 2016 15:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/10/10/coconet/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/10/10/coconet/</guid>
+        <pubDate>Tue, 11 Oct 2016 15:00:00 +0000</pubDate>
+        <link>https://douglaseck.github.io/blog/2016/10/11/coconet/</link>
+        <guid isPermaLink="true">https://douglaseck.github.io/blog/2016/10/11/coconet/</guid>
         
         <category>magenta</category>
         
@@ -447,557 +454,12 @@ soon on Magenta’s &lt;a href=&quot;magenta-github&quot;&gt;github&lt;/a&gt;.  
       </item>
     
       <item>
-        <title>Human Learning What WaveNet Learned from Humans</title>
-        <description>&lt;p&gt;(or Learning Music Learned From Music)&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/xTVwYFpK5Mo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;A few days ago, DeepMind posted audio synthesis results that included .wav files
-generated from a training data set of hours of solo piano music. Each wave file
-(near the bottom of
-&lt;a href=&quot;https://deepmind.com/blog/wavenet-generative-model-raw-audio/&quot;&gt;their post&lt;/a&gt;) is 10 seconds long,
-and sounds very much like piano music.
-I took a closer look at these samples.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Musically, I found the clips fascinating to listen to and in
-particular, before even knowing anything about the training data itself, they
-made me curious about it— curious both as a machine learning researcher, and
-also as a musician. For example, many moments in the synthesized examples
-reminded me of Russian composers such as
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Alexander_Skryabin&quot;&gt;Skryabin&lt;/a&gt;… why was this? One way that
-scientists learn is by trying to replicate what other scientists have done;
-similarly, one way that musicians learn is by trying to replicate what other
-musicians have created. So, in order to better understand what was going on in
-these sounds, I started learning to play some of the clips by ear on piano (this
-is sometimes called &lt;i&gt;lifting&lt;/i&gt;). I made the above video while working on WaveNet’s
-piano sample #3.
-(Disclaimer: this was done quickly—
-transcribing well is usually very time intensive— and roughly, with various
-inaccuracies, both at the note level but at other levels as well.) It is just a
-musical outline of the corresponding clip. The last couple of seconds are a bit
-of improvising I did just at that moment to continue the otherwise cut-off
-phrase.&lt;/p&gt;
-
-&lt;p&gt;I later recorded another variation of the same clip, this time on my electric keyboard, so that I could
-include a &lt;a href=&quot;/assets/sageev_transcription.mid&quot;&gt;MIDI file&lt;/a&gt;
-for you to download as well.&lt;/p&gt;
-
-&lt;iframe width=&quot;100%&quot; height=&quot;394&quot; src=&quot;https://musescore.com/user/12437891/scores/2659601/embed&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;small&gt;This is the score generated by MuseScore when fed the raw MIDI file. The rhythm
-is wrong and pedaling is absent, but you get to see the notes.&lt;/small&gt;&lt;/p&gt;
-
-&lt;p&gt;Learning this clip led me to a few observations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;contours of the dynamics sound extremely smooth— both unnatural and at the same
-time musically extremely effective (reminds me of the incredible control of a
-pianist like Horowitz)&lt;/li&gt;
-&lt;li&gt;the notes are generally locally “playable” (I just mean this coarsely, i.e. it is
-possible to press those notes all at the same time). why? the data is from
-humans playing piano, so in any brief time interval (e.g. the input window
-size), the sample is itself playable, and so an accurate generative model of
-this data would likely also be playable if one looks at any similar-sized time
-window&lt;/li&gt;
-&lt;li&gt;at least one exception to playability is in “textures”: there are moments where
-(to my ears) there is a “sound” of piano but without clear beginnings of notes;
-this could be happening for a variety of reasons; for now, I “musically
-outlined” this effect by playing something suggestive of the texture that I was
-hearing (i.e. a perceptual approximation)&lt;/li&gt;
-&lt;li&gt;musically speaking, those non-piano sounds are some of the most interesting
-sounds for me&lt;/li&gt;
-&lt;li&gt;it’s quite hard to play at the speed and with the smoothness of the recording.
-one reason is that while the notes themselves are generally locally playable,
-the transitions between sections are fast, frequent and furious, even within
-each 10-second clip: that’s not easy to play!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I hope these short notes provide some clues and ideas for how to further play with
-this fun generative model. Please feel free to add your own
-observations/insights/questions/transcriptions/etc. We are interested in
-building new tools for creative people and collaborating with the artistic
-community; if you have ideas of how such a collaboration might look, at least
-from your end, please feel free to comment on the Magenta
-&lt;a href=&quot;https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss&quot;&gt;discussion
-list&lt;/a&gt;
-or contact me directly.&lt;/p&gt;
-
-&lt;p&gt;–Sageev&lt;/p&gt;
-
-&lt;p&gt;&lt;i&gt;&lt;a href=&quot;http://www.cs.smu.ca/~sageev&quot;&gt;Sageev Oore&lt;/a&gt;, a visiting machine learning researcher on the Magenta team at
-&lt;a href=&quot;https://research.google.com/teams/brain/&quot;&gt;Google Brain&lt;/a&gt;, is a professor in the Dept of Math &amp;amp; Computer Science at Saint
-Mary’s University (Halifax, Canada), and records and performs as a musician.&lt;/i&gt;&lt;/p&gt;
-
+        <title>Natasha Blog</title>
+        <description>&lt;p&gt;Body of my blog. V2.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 23 Sep 2016 17:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/09/23/learning-music-from-learned-music/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/09/23/learning-music-from-learned-music/</guid>
-        
-        <category>midi,music,transcription</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Magenta MIDI Interface</title>
-        <description>&lt;p&gt;The magenta team is happy to announce our first step toward providing an easy-to-use
-interface between musicians and TensorFlow. This release makes it
-possible to connect a TensorFlow model to a MIDI controller and synthesizer in
-real time.&lt;/p&gt;
-
-&lt;p&gt;Don’t have your own MIDI keyboard? There are many free software
-components you can download and use with our interface. Find out more details on
-setting up your own TensorFlow-powered MIDI rig in the
-&lt;a href=&quot;https://github.com/tensorflow/magenta/tree/master/magenta/interfaces/midi/README.md&quot;&gt;README&lt;/a&gt;.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Along with the interface, we have also defined a simple
-&lt;a href=&quot;https://github.com/tensorflow/magenta/tree/master/magenta/models#generators&quot;&gt;API&lt;/a&gt;
-that enables developers to easily connect their own models to the MIDI
-interface. This allows users to share and interact with a range of models in the
-community, and additionally aid experimentation by testing out new ideas.&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img src=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/interfaces/midi/midi.png?raw=true&quot; alt=&quot;Sequence Diagram for the MIDI interface&quot; /&gt;&lt;br /&gt;
-  MIDI Instrument Interface
-&lt;/p&gt;
-
-&lt;p&gt;If you are in New York City this weekend (August 5-6), join us at the &lt;a href=&quot;http://labrosa.ee.columbia.edu/hamr_ismir2016/&quot;&gt;HAMR+MMH
-Hackathon&lt;/a&gt;, where we will be
-sharing more details on these tools.&lt;/p&gt;
-
-&lt;p&gt;–Magenta&lt;/p&gt;
-</description>
-        <pubDate>Tue, 02 Aug 2016 17:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/08/02/midi-interface/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/08/02/midi-interface/</guid>
-        
-        <category>midi,music</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Generating Long-Term Structure in Songs and Stories</title>
-        <description>&lt;p&gt;One of the difficult problems in using machine learning to generate sequences, such as melodies, is creating long-term structure. Long-term structure comes very naturally to people, but it’s very hard for machines. Basic machine learning systems can generate a short melody that stays in key, but they have trouble generating a longer melody that follows a chord progression, or follows a multi-bar song structure of verses and choruses. Likewise, they can produce a screenplay with grammatically correct sentences, but not one with a compelling plot line. Without long-term structure, the content produced by recurrent neural networks (RNNs) often seems wandering and random.&lt;/p&gt;
-
-&lt;p&gt;But what if these RNN models could recognize and reproduce longer-term structure?&lt;!--more--&gt; Could they produce content that feels more meaningful – more human? Today we’re open-sourcing two new Magenta models, &lt;b&gt;&lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/lookback_rnn&quot; target=&quot;_blank&quot;&gt;Lookback RNN&lt;/a&gt;&lt;/b&gt; and &lt;b&gt;&lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/attention_rnn&quot; target=&quot;_blank&quot;&gt;Attention RNN&lt;/a&gt;&lt;/b&gt;, both of which aim to improve RNNs’ ability to learn longer-term structures. We hope you’ll join us in exploring how they might produce better songs and stories.&lt;/p&gt;
-
-&lt;h1 id=&quot;lookback-rnn&quot;&gt;Lookback RNN&lt;/h1&gt;
-
-&lt;p&gt;Lookback RNN introduces custom inputs and labels. The custom inputs allow the model to more easily recognize patterns that occur across 1 and 2 bars. They also help the model recognize patterns related to where in the measure an event occurs. The custom labels make it easier for the model to repeat sequences of notes without having to store them in the RNN’s cell state. The type of RNN cell used in this model is an LSTM.&lt;/p&gt;
-
-&lt;p&gt;In our introductory model, Basic RNN, the input to the model was a one-hot vector of the previous event, and the label was the target next event. The possible events were note-off (turn off any currently playing note), no event (if a note is playing, continue sustaining it, otherwise continue silence), and a note-on event for each  pitch (which also turns off any other note that might be playing). In Lookback RNN, we add the following additional information to the input vector:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;In addition to inputting the previous event, we also input the events from 1 and 2 bars ago. This allows the model to more easily recognize patterns that occur across 1 and 2 bars, such as mirrored or contrasting melodies.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We also input whether the last event was repeating the event from 1 or 2 bars before it. This signals if the last event was creating something new, or just repeating an already established melody. This allows the model to more easily recognize patterns associated with being in a repetitive or non-repetitive state.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We also input the current position within the measure (as done previously by &lt;a href=&quot;http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/&quot; target=&quot;_blank&quot;&gt;Daniel Johnson&lt;/a&gt;), allowing the model to more easily learn patterns associated with 4/4 time music. These inputs are 5 values that can be thought of as a binary step clock.&lt;br /&gt;
-Step 1: &lt;script type=&quot;math/tex&quot;&gt;[0, 0, 0, 0, 1]&lt;/script&gt;&lt;br /&gt;
-Step 2: &lt;script type=&quot;math/tex&quot;&gt;[0, 0, 0, 1, 0]&lt;/script&gt;&lt;br /&gt;
-Step 3: &lt;script type=&quot;math/tex&quot;&gt;[0, 0, 0, 1, 1]&lt;/script&gt;&lt;br /&gt;
-Step 4: &lt;script type=&quot;math/tex&quot;&gt;[0, 0, 1, 0, 0]&lt;/script&gt;&lt;br /&gt;
-The only difference being the values are -1 and 1 instead of 0 and 1.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In addition to feeding the model more input information, we also add two new custom labels. The label to repeat the event from 1 bar ago and the label to repeat the event from 2 bars ago. This is where the Lookback RNN gets its name. When creating labels for the training data, if the current event in the melody is repeating the same event from 2 bars ago, we set the label for that step to be repeat-2-bars-ago. If it’s not repeating the event from 2 bars ago, we check if it’s repeating the event from 1 bar ago, and if so, we set the label for that step to be repeat-1-bar-ago. Only when the melody isn’t repeating 1 or 2 bars ago do we make the label for that step be a specific melody event. For example, if the third bar of the melody is completely repeating the first bar, every label for that third bar will be the repeat-2-bars-ago label. This allows the model to more easily repeat 1 or 2 bar phrases without having to store those sequences in its memory cell. Since a lot of melodies in popular music repeat events from 1 and 2 bars ago, these extra labels reduce the complexity of information the model has to learn to represent.&lt;/p&gt;
-
-&lt;p&gt;Here are some sample melodies generated by the Lookback RNN model when trained on a collection of popular music. The intro notes (played on the glockenspiel) were given to the model as a priming melody. The rest of the notes were generated.&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/vkdQEO0UBnY&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/5BvzdkRvMmI&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JA_DkaIYAoE&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;br /&gt;
-To train the Lookback RNN on your own MIDI collection and generate your own melodies from it, follow the steps in the &lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/lookback_rnn&quot; target=&quot;_blank&quot;&gt;README&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;attention-rnn&quot;&gt;Attention RNN&lt;/h1&gt;
-
-&lt;p&gt;To learn even longer-term structure we can use attention. Attention is one of the ways that models can access previous information without having to store it in the RNN cell’s state. The RNN cell used in this model is an LSTM. The attention method used comes from the paper &lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot; target=&quot;_blank&quot;&gt;Neural Machine Translation by Jointly Learning to Align and Translate&lt;/a&gt; (D Bahdanau, K Cho, Y Bengio, 2014). In that paper, the model is an encoder-decoder RNN, and the model uses attention to look at all the encoder outputs during each decoder step. In our version, where we don’t have an encoder-decoder, we just always look at the outputs from the last &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; steps when generating the output for the current step. The way we “look at” these steps is with an attention mechanism. Specifically:&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\begin{align}
-u_i^t &amp;= v^T \text{tanh}(W_1^\prime h_i + W_2^\prime c_t) \\
-a_i^t &amp;= \text{softmax}(u_i^t) \\
-h_t^\prime &amp;= \sum_{i=t-n}^{t-1} a_i^t h_i
-\end{align} %]]&gt;&lt;/script&gt;
-
-&lt;p&gt;The vector &lt;script type=&quot;math/tex&quot;&gt;v&lt;/script&gt; and matrices &lt;script type=&quot;math/tex&quot;&gt;W_1^\prime&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;W_2^\prime&lt;/script&gt; are learnable parameters of the model. &lt;script type=&quot;math/tex&quot;&gt;h_i&lt;/script&gt; are the RNN outputs from the previous &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; steps &lt;script type=&quot;math/tex&quot;&gt;(h_{t-n},...,h_{t-1})&lt;/script&gt;, and vector &lt;script type=&quot;math/tex&quot;&gt;c_t&lt;/script&gt; is the current step’s RNN cell state. These values are used to calculate &lt;script type=&quot;math/tex&quot;&gt;u_i^t&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;(u_{t-n}^t,...,u_{t-1}^t)&lt;/script&gt;, an &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; length vector with one value for each of the previous &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; steps. The values represent how much attention each step should receive. A softmax is used to normalize these values and create a mask-like vector &lt;script type=&quot;math/tex&quot;&gt;a_i^t&lt;/script&gt;, called the attention mask. The RNN outputs from the previous &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; steps are then multiplied by these attention mask values and then summed together to get &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt;. For example, let’s assume we are on the 4th step of our sequence and &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; = 3, which means our attention mechanism is only looking at the last 3 steps. For this example, the RNN output vectors will be small 4 length vectors. If the RNN outputs from the first 3 steps are:&lt;/p&gt;
-
-&lt;p&gt;Step 1: &lt;script type=&quot;math/tex&quot;&gt;[1.0, 0.0, 0.0, 1.0]&lt;/script&gt;&lt;br /&gt;
-Step 2: &lt;script type=&quot;math/tex&quot;&gt;[0.0, 1.0, 0.0, 1.0]&lt;/script&gt;&lt;br /&gt;
-Step 3: &lt;script type=&quot;math/tex&quot;&gt;[0.0, 0.0, 0.5, 0.0]&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;And our calculated attention mask is:&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;a_{i}^{t}&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;= [0.7, 0.1, 0.2]&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;Then the previous step would get 20% attention, 2 steps ago would get 10% attention, and 3 steps ago would get 70% attention. So their masked values would be:&lt;/p&gt;
-
-&lt;p&gt;Step 1 (70%): &lt;script type=&quot;math/tex&quot;&gt;[0.7, 0.0, 0.0, 0.7]&lt;/script&gt;&lt;br /&gt;
-Step 2 (10%): &lt;script type=&quot;math/tex&quot;&gt;[0.0, 0.1, 0.0, 0.1]&lt;/script&gt;&lt;br /&gt;
-Step 3 (20%): &lt;script type=&quot;math/tex&quot;&gt;[0.0, 0.0, 0.1, 0.0]&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;And then they’d be summed together to get &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; &lt;script type=&quot;math/tex&quot;&gt;= [0.7, 0.1, 0.1, 0.8]&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector is essentially all &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; previous outputs combined together, but each output contributing a different amount relative to how much attention that step received.&lt;/p&gt;
-
-&lt;p&gt;This &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector is then concatenated with the RNN output from the current step and a linear layer is applied to that concatenated vector to create the new output for the current step. Some attention models only apply this &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector to the RNN output, but in our model, as is also sometimes done, this &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector is also applied to the input of the next step. The &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector is concatenated with the next step’s input vector and a linear layer is applied to that concatenated vector to create the new input to the RNN cell. This helps attention not only affect the data coming out of the RNN cell, but also the data being fed into the RNN cell.&lt;/p&gt;
-
-&lt;p&gt;This &lt;script type=&quot;math/tex&quot;&gt;h_t^\prime&lt;/script&gt; vector, which is a combination of the outputs from the previous &lt;script type=&quot;math/tex&quot;&gt;n&lt;/script&gt; steps, is how attention can directly inject information from those previous steps into the current step’s network of calculations, making it easier for the model to learn longer-term dependencies without having to store all that information from those previous steps in the RNN cell’s state. If you’d like an even deeper understanding of the whole attention process, you can walk through &lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/attention_rnn/attention_rnn_graph.py&quot; target=&quot;_blank&quot;&gt;the code&lt;/a&gt; to see exactly what’s happening.&lt;/p&gt;
-
-&lt;p&gt;Here are some sample melodies generated by the Attention RNN model when trained on a collection of popular music. These melodies were all primed with the first four notes of Twinkle Twinkle Little Star, then the rest of the notes were generated by the model:&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/nHxr9u9_4_s&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/iZ-OqPzOqIQ&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/yW-SvX64xOA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;br /&gt;
-Melody 1 and 2 were combined in a standard song format, AABA, and backed up by drums to create the following song sample:&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/TgKd8_r-yl8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;br /&gt;
-Jason Nguyen (&lt;a href=&quot;https://www.youtube.com/user/SoulGook/&quot; target=&quot;_blank&quot;&gt;@SoulGook&lt;/a&gt;), on the đàn bầu, and Alex Koman (&lt;a href=&quot;https://www.facebook.com/meloscribe&quot; target=&quot;_blank&quot;&gt;@meloscribe&lt;/a&gt;), on guitar, added to that song to create this man and machine collaboration:&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Aq3370Prbi4&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;br /&gt;
-The following song uses the three Attention RNN melodies listed above by layering them all together. They compliment each other surprisingly well. The drums and bass line were added by a human. This demonstrates how musicians could use these generated melodies for building out larger, more elaborate songs.&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qFBQDfPyjoE&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;br /&gt;
-To train the Attention RNN on your own MIDI collection and generate your own melodies from it, follow the steps in the &lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/attention_rnn&quot; target=&quot;_blank&quot;&gt;README&lt;/a&gt; on GitHub.&lt;/p&gt;
-
-&lt;p&gt;These models improve on the initial Magenta &lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/models/basic_rnn&quot; target=&quot;_blank&quot;&gt;Basic RNN&lt;/a&gt; by adding two forms of memory manipulation, simple lookback and learned attention. Nevertheless, a lot of work remains before Magenta models are writing complete pieces of music or telling long stories. Stay tuned for more improvements.&lt;/p&gt;
-
-&lt;p&gt;Edit (@elliotwaite Aug 8, 2016): Updated the reference for the attention method used to the paper that originally introduced the idea, &lt;a href=&quot;https://arxiv.org/abs/1409.0473&quot; target=&quot;_blank&quot;&gt;Neural Machine Translation by Jointly Learning to Align and Translate&lt;/a&gt; (D Bahdanau, K Cho, Y Bengio, 2014).&lt;/p&gt;
-
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;
-
-</description>
-        <pubDate>Fri, 15 Jul 2016 17:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/</guid>
-        
-        <category>melody,music,rnn,lstm,attention,lookback</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Music, Art and Machine Intelligence (MAMI) Conference</title>
-        <description>&lt;p&gt;This past June, Magenta, in parternship with the
-&lt;a href=&quot;https://ami.withgoogle.com&quot;&gt;Artists and Machine Intelligence&lt;/a&gt; group, hosted
-the Music, Art and Machine Intelligence (MAMI) Conference in San Francisco.
-MAMI brought together artists and researchers to share their work and explore
-new ideas in the burgeoning space intersecting art and machine learning.&lt;/p&gt;
-
-&lt;p&gt;AMI has posted a wonderful &lt;a href=&quot;https://medium.com/artists-and-machine-intelligence/music-art-machine-intelligence-2016-conference-proceedings-ea376a4e2576&quot;&gt;summary&lt;/a&gt;
-of the event on their blog, which we encourage you to read.&lt;/p&gt;
-
-&lt;p&gt;Many of the lectures have also been made available on &lt;a href=&quot;https://www.youtube.com/playlist?list=PL8h7Hk91ScJ2NKFS_i8y4DYk4Zg1LHn0a&quot;&gt;YouTube&lt;/a&gt;,
-including talks by Google ML researchers &lt;a href=&quot;https://www.youtube.com/watch?v=agA-rc71Uec&amp;amp;list=PL8h7Hk91ScJ2NKFS_i8y4DYk4Zg1LHn0a&amp;amp;index=1&quot;&gt;Samy Bengio&lt;/a&gt;
-and &lt;a href=&quot;https://www.youtube.com/watch?v=LgEzAcRrK5A&amp;amp;list=PL8h7Hk91ScJ2NKFS_i8y4DYk4Zg1LHn0a&amp;amp;index=9&quot;&gt;Blaise Aguera y Arcas&lt;/a&gt;,
-&lt;a href=&quot;http://www.wekinator.org&quot;&gt;Wekinator&lt;/a&gt; creator &lt;a href=&quot;https://www.youtube.com/watch?v=zzadrm3SPrQ&amp;amp;list=PL8h7Hk91ScJ2NKFS_i8y4DYk4Zg1LHn0a&amp;amp;index=12&quot;&gt;Rebecca Fiebrink&lt;/a&gt;,
-and artist &lt;a href=&quot;https://www.youtube.com/watch?v=ZoPt8R6F6LI&amp;amp;list=PL8h7Hk91ScJ2NKFS_i8y4DYk4Zg1LHn0a&amp;amp;index=5&quot;&gt;Mario Klingmann&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;We hope you will find the content of the conference as stimulating as we did
-and take part in the ongoing conversation in our &lt;a href=&quot;https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss&quot;&gt;discussion group&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;– Magenta&lt;/p&gt;
-</description>
-        <pubDate>Mon, 11 Jul 2016 15:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/07/11/mami/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/07/11/mami/</guid>
-        
-        <category>mami</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Reading List</title>
-        <description>&lt;p&gt;Magenta’s primary goal is to push the envelope forward in research on music and art generation. Another goal of ours is to teach others about that research. This includes disseminating important works in the field in one place, a resource that if curated, will be valuable to the community for years to come.&lt;/p&gt;
-
-&lt;p&gt;Towards that end, we are publishing today a batch of &lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/reviews/README.md&quot;&gt;reviews&lt;/a&gt; of research papers that we think everyone in the field should read and understand. It will be hosted on our GitHub in the reviews section. This list certainly isn’t definitive and is purposefully meant to be organic. It includes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/reviews/draw.md&quot;&gt;DRAW: A Recurrent Neural Network For Image Generation&lt;/a&gt; by Gregor et al. (&lt;a href=&quot;https://arxiv.org/abs/1502.04623&quot;&gt;paper&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/reviews/summary_generation_sequences.md&quot;&gt;Generating Sequences with Recurrent Neural Networks&lt;/a&gt; by Graves. (&lt;a href=&quot;http://arxiv.org/abs/1308.0850&quot;&gt;paper&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=-yX1SYeDHbg&quot;&gt;video&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/tensorflow/magenta/blob/master/magenta/reviews/styletransfer.md&quot;&gt;A Neural Algorithm of Artistic Style&lt;/a&gt; by Gatys et al. (&lt;a href=&quot;http://arxiv.org/abs/1508.06576&quot;&gt;paper&lt;/a&gt;)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We will have two more for you soon and others on a rolling basis.&lt;/p&gt;
-
-&lt;p&gt;There are certainly many other papers and resources that belong here. We want this to be a community endeavor and encourage high-quality summaries, both in terms of reviews and selection. So if you have a favorite, please file an &lt;a href=&quot;https://github.com/tensorflow/magenta/issues&quot;&gt;issue&lt;/a&gt; saying which paper you want to write about. After we approve the topic, submit a pull request and we’ll be delighted to showcase your work.&lt;/p&gt;
-
-&lt;p&gt;– Magenta&lt;/p&gt;
-</description>
-        <pubDate>Wed, 29 Jun 2016 19:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/06/29/reading-list/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/06/29/reading-list/</guid>
-        
-        <category>review</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>A Recurrent Neural Network Music Generation Tutorial</title>
-        <description>&lt;p&gt;We are excited to release our first
-&lt;a href=&quot;https://github.com/tensorflow/magenta/tree/master/magenta/models/basic_rnn&quot;&gt;tutorial model&lt;/a&gt;,
-a recurrent neural network that generates music. It serves as an end-to-end primer on how to build
-a recurrent network in &lt;a href=&quot;https://www.tensorflow.org&quot;&gt;TensorFlow&lt;/a&gt;. It also
-demonstrates a sampling of what’s to come in Magenta. In addition, we are
-releasing code that converts MIDI files to a format that TensorFlow can
-understand, making it easy to create training datasets from any collection of
-MIDI files.&lt;/p&gt;
-
-&lt;p&gt;This tutorial will allow you to to generate music with a recurrent neural
-network. It’s purposefully a simple model, so don’t expect stellar music
-results. We’ll post more complex models soon.&lt;/p&gt;
-
-&lt;h1 id=&quot;background-on-recurrent-neural-networks&quot;&gt;Background on Recurrent Neural Networks&lt;/h1&gt;
-
-&lt;p&gt;A recurrent neural network (RNN) has looped, or recurrent, connections which
-allow the network to hold information across inputs. These connections can be
-thought of as similar to memory. RNNs are particularly useful for learning
-sequential data like music.&lt;/p&gt;
-
-&lt;p&gt;In TensorFlow, the recurrent connections in a graph are unrolled into an
-equivalent feed-forward network. That network is then trained using a gradient
-descent technique called backpropagation through time
-(&lt;a href=&quot;https://en.wikipedia.org/wiki/Backpropagation_through_time&quot;&gt;BPTT&lt;/a&gt;).&lt;/p&gt;
-
-&lt;!-- http://stackoverflow.com/a/19360305 --&gt;
-&lt;table class=&quot;image&quot;&gt;
-&lt;caption align=&quot;bottom&quot;&gt;An RNN&#39;s recurrent connection unrolled through time. Image courtesy
-of Chris Olah.&lt;/caption&gt;
-&lt;tr&gt;&lt;td&gt;&lt;img src=&quot;http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/RNN-unrolled.png&quot; alt=&quot;Unrolled RNN&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;p&gt;There are endless ways that an RNN can connect back to itself with recurrent
-connections. People typically stick to a few common patterns, the most common
-being Long Short-Term Memory (LSTM) cells and Gated Recurrent Units (GRU). These
-both have multiplicative gates that protect their internal memory from being
-overwritten too easily, allowing them to handle longer sequences. We use LSTMs
-in this model. To learn more about RNNs and specifically LSTMs, check out
-&lt;a href=&quot;http://colah.github.io/posts/2015-08-Understanding-LSTMs&quot;&gt;Chris Olah’s fantastic post&lt;/a&gt;. Experts
-in the field might also like to look at Goodfellow, Bengio and Courville’s
-&lt;a href=&quot;http://www.deeplearningbook.org/contents/rnn.html&quot;&gt;RNN chapter&lt;/a&gt; from their book
-“Deep Learning.”&lt;/p&gt;
-
-&lt;h1 id=&quot;this-release&quot;&gt;This Release&lt;/h1&gt;
-
-&lt;p&gt;This RNN is the first in a series of models we will be releasing which predict
-the next note given a sequence of previous notes. They do this by learning a
-probability distribution over the next notes given all the previous notes. By
-sampling from that distribution and feeding the chosen note back into the model
-at the next step, the RNN can dream up an entire melody. Generative models are
-typically unsupervised, meaning that there are samples but no labels. However we
-turn the problem of melody generation into a supervised one by trying to predict
-the next note in a sequence, that way labels can be derived from any dataset of
-just music and nothing else. This allows us to use RNNs which are supervised
-models.&lt;/p&gt;
-
-&lt;p&gt;It takes a bit of work to put together a training set of melodies, so we are
-providing code that reads an archive of MIDI files and outputs monophonic melody
-lines extracted from them in a format TensorFlow can understand. After you have
-that ready, instructions to build and run the model are
-&lt;a href=&quot;https://github.com/tensorflow/magenta/tree/master/magenta/models/basic_rnn&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;feedback&quot;&gt;Feedback&lt;/h1&gt;
-
-&lt;p&gt;As always, we are excited to hear from you. Let us know what you liked, didn’t
-like, and want to see in the future from Magenta. You can add some code to our
-&lt;a href=&quot;https://github.com/tensorflow/magenta&quot;&gt;GitHub&lt;/a&gt; or join our
-&lt;a href=&quot;https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss&quot;&gt;discussion group&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 10 Jun 2016 01:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/2016/06/10/recurrent-neural-network-generation-tutorial/</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/2016/06/10/recurrent-neural-network-generation-tutorial/</guid>
-        
-        <category>model,melody,rnn,lstm</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Magenta!</title>
-        <description>&lt;p&gt;We’re happy to announce Magenta, a project from the &lt;a href=&quot;https://research.google.com/teams/brain/&quot;&gt;Google Brain
-team&lt;/a&gt; that asks: Can we use
-machine learning to create compelling art and music? If so, how? If
-not, why not?  We’ll use &lt;a href=&quot;https://www.tensorflow.org&quot;&gt;TensorFlow&lt;/a&gt;, and
-we’ll release our models and tools in open source on our GitHub. We’ll
-also post demos, tutorial blog postings and technical papers. Soon
-we’ll begin accepting code contributions from the community at
-large. If you’d like to keep up on Magenta as it grows, you can follow
-us on our &lt;a href=&quot;https://github.com/tensorflow/magenta&quot;&gt;GitHub&lt;/a&gt; and join our
-&lt;a href=&quot;https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss&quot;&gt;discussion
-group&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;what-is-magenta&quot;&gt;What is Magenta?&lt;/h1&gt;
-
-&lt;p&gt;Magenta has two goals. First, it’s a research project to advance the
-state of the art in machine intelligence for music and art
-generation. Machine learning has already been used extensively to
-understand content, as in speech recognition or translation. With
-Magenta, we want to explore the other side—developing algorithms that
-can learn how to generate art and music, potentially creating
-compelling and artistic content on their own.&lt;/p&gt;
-
-&lt;p&gt;Second, Magenta is an attempt to build a community of artists, coders
-and machine learning researchers. The core Magenta team will build
-open-source infrastructure around TensorFlow for making art and music.
-We’ll start with audio and video support, tools for working with
-formats like MIDI, and platforms that help artists connect to machine
-learning models.  For example, we want to make it super simple to play
-music along with a &lt;a href=&quot;https://www.youtube.com/watch?v=01V9S8_7A0I&amp;amp;feature=youtu.be&quot;&gt;Magenta&lt;/a&gt; performance model.&lt;/p&gt;
-
-&lt;p&gt;We don’t know what artists and musicians will do with these new tools,
-but we’re excited to find out. Look at the history of creative
-tools. Daguerre and later Eastman didn’t imagine what &lt;a href=&quot;https://en.wikipedia.org/wiki/Annie_Leibovitz&quot;&gt;Annie
-Liebovitz&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Richard_Avedon&quot;&gt;Richard
-Avedon&lt;/a&gt; would accomplish
-in photography. Surely Rickenbacker and Gibson didn’t have &lt;a href=&quot;https://en.wikipedia.org/wiki/Jimi_Hendrix&quot;&gt;Jimi
-Hendrix&lt;/a&gt; or
-&lt;a href=&quot;https://en.wikipedia.org/wiki/St._Vincent_(musician)&quot;&gt;St. Vincent&lt;/a&gt; in
-mind.  We believe that the models that have worked so well in speech
-recognition, translation and image annotation will seed an exciting
-new crop of tools for art and music creation.&lt;/p&gt;
-
-&lt;p&gt;To start, Magenta is being developed by a small team of researchers
-from the Google Brain team.  If you’re a researcher or a coder, you
-can check out our alpha-version
-&lt;a href=&quot;https://www.github.com/tensorflow/magenta&quot;&gt;code&lt;/a&gt;. Once we have a
-stable set of tools and models, we’ll invite external contributors to
-check in code to our GitHub. If you’re a musician or an artist (or
-aspire to be one—it’s easier than you might think!), we hope you’ll
-try using these tools to make some noise or images or videos… or
-whatever you like.&lt;/p&gt;
-
-&lt;p&gt;Our goal is to build a community where the right people are there to
-help out.  If the Magenta tools don’t work for you, let us know.  We
-encourage you to join our discussion list and shape how Magenta
-evolves.  We’d love to know what you think of our work—as an artist,
-musician, researcher, coder, or just an aficionado. You can follow our
-progress and check out some of the music and art Magenta helps create
-right here on this blog.  As we begin accepting code from community
-contributors, the blog will also be open to posts from these
-contributors, not just Google Brain team members.&lt;/p&gt;
-
-&lt;h1 id=&quot;research-themes&quot;&gt;Research Themes&lt;/h1&gt;
-
-&lt;p&gt;We’ll talk about our research goals in more depth later, via a series
-of tutorial blog postings. But here’s a short outline to give an idea
-of where we’re heading.&lt;/p&gt;
-
-&lt;h2 id=&quot;generation&quot;&gt;Generation&lt;/h2&gt;
-
-&lt;p&gt;Our main goal is to design algorithms that learn how to generate art
-and music.  There’s been a lot of great work in image generation from
-neural networks, such as
-&lt;a href=&quot;http://googleresearch.blogspot.com/2015/06/inceptionism-going-deeper-into-neural.html&quot;&gt;DeepDream&lt;/a&gt;
-from A. Mordvintsev et al. at Google and &lt;a href=&quot;http://arxiv.org/abs/1508.06576&quot;&gt;Neural Style
-Transfer&lt;/a&gt; from L. Gatys et al. at
-U. Tübingen. We believe this area is in its infancy, and expect to see
-fast progress here. For those following machine learning closely, it
-should be clear that this progress is already well underway.  But
-there remain a number of interesting questions: How can we make models
-like these truly
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Generative_model&quot;&gt;generative&lt;/a&gt;? How can
-we better take advantage of user feedback?&lt;/p&gt;
-
-&lt;h2 id=&quot;attention-and-surprise&quot;&gt;Attention and Surprise&lt;/h2&gt;
-
-&lt;p&gt;It’s not enough just to sample images or sequences from some learned
-distribution.  Art is dynamic! Artists and musicians draw our
-attention to one thing at the expense of another. They change their
-story over time—is any Beatles album exactly like another?—and there’s
-always some element of surprise at play. How do we capture effects
-like attention and surprise in a machine learning model? While we
-don’t have a complete answer for this question, we can point to some
-interesting models such as the &lt;a href=&quot;http://arxiv.org/abs/1502.03044&quot;&gt;Show, Attend and Tell
-model&lt;/a&gt; by Xu et al. from the &lt;a href=&quot;https://mila.umontreal.ca/en/&quot;&gt;MILA
-lab&lt;/a&gt; in Montreal that learns to control
-an attentional lens, using it to generate descriptive sentences of
-images.&lt;/p&gt;
-
-&lt;h2 id=&quot;storytelling&quot;&gt;Storytelling&lt;/h2&gt;
-
-&lt;p&gt;This leads to perhaps our biggest challenge: combining generation,
-attention and surprise to tell a compelling story.  So much
-machine-generated music and art is good in small chunks, but lacks any
-sort of long-term narrative arc. (To be fair, my own 2002 &lt;a href=&quot;http://www.iro.umontreal.ca/~eckdoug/blues/index.html&quot;&gt;music
-generation
-work&lt;/a&gt; falls
-into this category).  Alternately, some machine generated content does
-have long-term structure, but that structure is provided TO rather
-than learned BY the algorithm. This is the case, for example, in David
-Cope’s very interesting &lt;a href=&quot;http://artsites.ucsc.edu/faculty/cope/experiments.htm&quot;&gt;Experiments in Musical Intelligence
-(EMI)&lt;/a&gt;, in
-which an AI model deconstructs compositions by human composers, finds
-common signatures in them, and recombines them into new works.  The
-design of models that learn to construct long narrative arcs is
-important not only for music and art generation, but also areas like
-language modeling, where it remains a challenge to carry meaning even
-across a long paragraph, much less whole stories. Attention models
-like the Show, Attend and Tell point to one promising direction, but
-this remains a very challenging task.&lt;/p&gt;
-
-&lt;h2 id=&quot;evaluation&quot;&gt;Evaluation&lt;/h2&gt;
-
-&lt;p&gt;Evaluating the output of generative models is deceivingly
-difficult. The time will come when Magenta has 20 different music
-generation models available in open source.  How do we decide which
-ones are good?  One option is to compare model output to training data
-by measuring
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Likelihood_function&quot;&gt;likelihood&lt;/a&gt;.  For
-music and art, this doesn’t work very well. As argued very nicely in
-&lt;a href=&quot;http://arxiv.org/abs/1511.01844&quot;&gt;A note on generative models&lt;/a&gt; (Theis
-et al.), it’s easy to generate outputs that are close in terms of
-likelihood, but far in terms of appeal (and vice versa). This
-motivates work in artificial adversaries such as &lt;a href=&quot;https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf&quot;&gt;Generative
-Adversarial
-Nets&lt;/a&gt;
-by Goodfellow et al. from MILA in Montreal. In the end, to answer the
-evaluation question we need to get Magenta tools in the hands of
-artists and musicians, and Magenta media in front of viewers and
-listeners. As Magenta evolves, we’ll be working on good ways to
-achieve this.&lt;/p&gt;
-
-&lt;h2 id=&quot;other-google-efforts&quot;&gt;Other Google efforts&lt;/h2&gt;
-
-&lt;p&gt;Finally, we want to mention other Google efforts and resources related
-to Magenta.  The &lt;a href=&quot;https://ami.withgoogle.com/&quot;&gt;Artists and Machine Intelligence
-(AMI)&lt;/a&gt; project is connecting with artists
-to ask: What do art and technology have to do with each other? What is
-machine intelligence, and what does ‘machine intelligence art’ look,
-sound and feel like? Check out their
-&lt;a href=&quot;https://medium.com/artists-and-machine-intelligence&quot;&gt;blog&lt;/a&gt; for more
-about AMI.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://www.google.com/culturalinstitute/home&quot;&gt;Google Cultural
-Institute&lt;/a&gt; is fostering
-the discovery of exhibits and collections from museums and archives
-all around the world. Via their &lt;a href=&quot;https://www.google.com/culturalinstitute/thelab/&quot;&gt;Lab at the Cultural Institute&lt;/a&gt;, they’re also
-connecting directly with artists. As we make TensorFlow/Magenta the
-best machine learning platform in the world for art and music
-generation, we’ll work closely with both AMI and the Google Cultural
-Institute to connect artists with technology. To learn more about our
-various efforts, be sure to check out the &lt;a href=&quot;http://googleresearch.blogspot.com/&quot;&gt;Google Research
-Blog&lt;/a&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 01 Jun 2016 15:00:00 +0000</pubDate>
-        <link>https://magenta.tensorflow.org/welcome-to-magenta</link>
-        <guid isPermaLink="true">https://magenta.tensorflow.org/welcome-to-magenta</guid>
+        <pubDate>Sun, 09 Oct 2016 15:00:00 +0000</pubDate>
+        <link>https://douglaseck.github.io/blog/2016/10/09/natasha/</link>
+        <guid isPermaLink="true">https://douglaseck.github.io/blog/2016/10/09/natasha/</guid>
         
         <category>magenta</category>
         
