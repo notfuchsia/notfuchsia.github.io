@@ -8,13 +8,13 @@ gems: [jekyll-paginate]
 paginate_path: "page:num"
 
 # Setup
-title:               Testing
-tagline:             "Testing blog for editing"
-description:         Testing blog for editing.
+title:               Not Fuchsia
+tagline:             "Test blog for editing"
+description:         "Testing blog for editing."
 base-url:             "base-url"
 baseurl:             ""
-url:                 "https://douglaseck.github.io/blog"
-github:              "https://www.github.com/deck/blog"
+url:                 "https://notfuchsia.github.io"
+github:              "https://www.github.com/notfuchsia"
 timezone:            UTC
 
 exclude: ["README.md", "OWNERS", "update_blog.sh"]
