@@ -1,0 +1,2 @@
+# notfuchsia.github.io
+Blog
