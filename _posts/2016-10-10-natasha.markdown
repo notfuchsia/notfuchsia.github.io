@@ -1,0 +1,9 @@
+---
+layout: post
+title: Natasha Blog
+date:   2016-10-09 08:00:00 -0700
+author: natashajaques
+tags: magenta
+---
+
+Body of my blog. V2.

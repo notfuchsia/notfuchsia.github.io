@@ -1,2 +1,1 @@
-# notfuchsia.github.io
-Blog
+# Not Fuscia Test Blog

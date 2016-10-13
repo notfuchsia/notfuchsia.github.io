@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Recurrent Neural Network Music Generation Tutorial</title>
+  <meta name="description" content="We are excited to release our firsttutorial model,a recurrent neural network that generates music. It serves as an end-to-end primer on how to builda recurre...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://magenta.tensorflow.org/2016/06/10/recurrent-neural-network-generation-tutorial/">
+  <link rel="alternate" type="application/rss+xml" title="Magenta" href="https://magenta.tensorflow.org/feed.xml">
+  <script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+  <script>
+  new gweb.analytics.AutoTrack({
+    profile: 'UA-80107903-1'
+  });
+  </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+    <a class="site-title" href="/"><span class="site-title"><img src="/assets/magenta-logo.png" height=75></span>
+</a -->
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        <a class="page-link" href="https://www.github.com/tensorflow/magenta">GitHub</a>
+        <a class="page-link" href="/feed.xml">RSS feed</a>
+        <a class="page-link" href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">Discuss</a>
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">A Recurrent Neural Network Music Generation Tutorial</h1>
+
+    <p class="post-meta"><time datetime="2016-06-10T01:00:00+00:00" itemprop="datePublished">Jun 10, 2016</time>
+     •
+      
+        Dan Abolafia
+      
+      
+        (<a href="https://github.com/danabo"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">danabo</span></a>
+)
+      
+    </span>
+    </span></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>We are excited to release our first
+<a href="https://github.com/tensorflow/magenta/tree/master/magenta/models/basic_rnn">tutorial model</a>,
+a recurrent neural network that generates music. It serves as an end-to-end primer on how to build
+a recurrent network in <a href="https://www.tensorflow.org">TensorFlow</a>. It also
+demonstrates a sampling of what’s to come in Magenta. In addition, we are
+releasing code that converts MIDI files to a format that TensorFlow can
+understand, making it easy to create training datasets from any collection of
+MIDI files.</p>
+
+<p>This tutorial will allow you to to generate music with a recurrent neural
+network. It’s purposefully a simple model, so don’t expect stellar music
+results. We’ll post more complex models soon.</p>
+
+<h1 id="background-on-recurrent-neural-networks">Background on Recurrent Neural Networks</h1>
+
+<p>A recurrent neural network (RNN) has looped, or recurrent, connections which
+allow the network to hold information across inputs. These connections can be
+thought of as similar to memory. RNNs are particularly useful for learning
+sequential data like music.</p>
+
+<p>In TensorFlow, the recurrent connections in a graph are unrolled into an
+equivalent feed-forward network. That network is then trained using a gradient
+descent technique called backpropagation through time
+(<a href="https://en.wikipedia.org/wiki/Backpropagation_through_time">BPTT</a>).</p>
+
+<!-- http://stackoverflow.com/a/19360305 -->
+<table class="image">
+<caption align="bottom">An RNN's recurrent connection unrolled through time. Image courtesy
+of Chris Olah.</caption>
+<tr><td><img src="http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/RNN-unrolled.png" alt="Unrolled RNN" /></td></tr>
+</table>
+
+<p>There are endless ways that an RNN can connect back to itself with recurrent
+connections. People typically stick to a few common patterns, the most common
+being Long Short-Term Memory (LSTM) cells and Gated Recurrent Units (GRU). These
+both have multiplicative gates that protect their internal memory from being
+overwritten too easily, allowing them to handle longer sequences. We use LSTMs
+in this model. To learn more about RNNs and specifically LSTMs, check out
+<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs">Chris Olah’s fantastic post</a>. Experts
+in the field might also like to look at Goodfellow, Bengio and Courville’s
+<a href="http://www.deeplearningbook.org/contents/rnn.html">RNN chapter</a> from their book
+“Deep Learning.”</p>
+
+<h1 id="this-release">This Release</h1>
+
+<p>This RNN is the first in a series of models we will be releasing which predict
+the next note given a sequence of previous notes. They do this by learning a
+probability distribution over the next notes given all the previous notes. By
+sampling from that distribution and feeding the chosen note back into the model
+at the next step, the RNN can dream up an entire melody. Generative models are
+typically unsupervised, meaning that there are samples but no labels. However we
+turn the problem of melody generation into a supervised one by trying to predict
+the next note in a sequence, that way labels can be derived from any dataset of
+just music and nothing else. This allows us to use RNNs which are supervised
+models.</p>
+
+<p>It takes a bit of work to put together a training set of melodies, so we are
+providing code that reads an archive of MIDI files and outputs monophonic melody
+lines extracted from them in a format TensorFlow can understand. After you have
+that ready, instructions to build and run the model are
+<a href="https://github.com/tensorflow/magenta/tree/master/magenta/models/basic_rnn">here</a>.</p>
+
+<h1 id="feedback">Feedback</h1>
+
+<p>As always, we are excited to hear from you. Let us know what you liked, didn’t
+like, and want to see in the future from Magenta. You can add some code to our
+<a href="https://github.com/tensorflow/magenta">GitHub</a> or join our
+<a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">discussion group</a>.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>
