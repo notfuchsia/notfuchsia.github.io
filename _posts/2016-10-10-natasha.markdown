@@ -12,7 +12,17 @@ Any human music student gets taught concepts of music theory!
 
 Music Theory Rewards
 --------------------
-
+\begin{itemize}
+  \item \textbf{Stay in key}: Notes should belong to the same key. For example, if the desired key is C-major, a B-flat would not be an acceptable note. 
+  \item \textbf{Begin and end with the tonic note}: The first note of the composition, and the first note of the final bar should be the tonic note of the key; e.g. if the key is C-major, this note would be middle C, or 14 in our encoding. 
+  \item \textbf{Avoid excessively repeated notes}: Unless a rest is introduced or a note is held, a single tone should not be repeated more than four times in a row. While the number four can be considered a rough heuristic, avoiding excessively repeated notes and static melodic contours is Gauldin's first rule of melodic composition \cite{gauldin1995practical}.
+  \item \textbf{Prefer harmonious intervals}: The composition should avoid awkward intervals like augmented sevenths, or large jumps of more than an octave. Since ``a mixture of motion by both step and leap is preferred, with some tendency towards the former", both small steps and larger harmonic intervals are rewarded, but the reward for smaller steps is somewhat higher. 
+  \item \textbf{Resolve large leaps}: When the composition leaps several pitches in one direction, it should eventually be resolved by a leap back or gradual movement in the opposite direction. Leaping twice in the same direction is negatively rewarded. 
+  \item \textbf{Avoid continuously repeating extrema notes}: The highest note of the composition should be unique, as should the lowest note. 
+  \item \textbf{Avoid high auto-correlation}: To encourage variety, the reward function penalizes a melody if it is highly correlated with itself at a lag of 1, 2, or 3 beats. 
+  \item \textbf{Play motifs}: A musical motif is a succession of notes representing the shortest musical ``idea''; in our implementation, it is defined as a bar of music with three or more unique notes. 
+  \item \textbf{Play repeated motifs}: Because repetition has been shown to be key to emotional engagement with music \cite{livingstone}, we sought to train the model to repeat motifs that it had previously introduced. 
+\end{itemize}
 
 Introduction to Deep Q-Learning
 ---------------------
