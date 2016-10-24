@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Generating Music by Fine-Tuning Recurrent Neural Networks with Reinforcement Learning
+title: Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
 date:   2016-10-24 08:00:00 -0700
-author: Natasha Jaques
+author: natashajaques
 tags: magenta
 ---
 
