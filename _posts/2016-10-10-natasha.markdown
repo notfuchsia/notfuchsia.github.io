@@ -45,18 +45,18 @@ In Q-learning, the goal is to learn a Q function that gives the maximum expected
 \begin{align}
 Q^*(s, a) = max_\pi \mathbb{E}[R_t|s_t = s, a_t = a, \pi]
 \end{align}
-where $\pi$ is a policy mapping states to distributions over actions. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
+where $$\pi$$ is a policy mapping states to distributions over actions. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
 \begin{align}
 Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
 \end{align}
 where *r* is the reward received for taking action *a* in state *s*. This value iteration method will converge to $$Q^*$$ as $$i \rightarrow \infty$$ \cite{sutton}.
 
-In Deep Q Learning (DQL) \cite{dqn}, a neural network called the \emph{Q-network} is used to approximate the Q function, $$Q(s, a; \theta) \approx Q^*(s, a)$$. The network parameters $$\theta$$ are learned by applying stochastic gradient descent (SGD) updates with respect to the following loss function:
+In Deep Q Learning (DQL) \cite{dqn}, a neural network called the *Q-network* is used to approximate the Q function, $$Q(s, a; \theta) \approx Q^*(s, a)$$. The network parameters $$\theta$$ are learned by applying stochastic gradient descent (SGD) updates with respect to the following loss function:
 \begin{align} 
 \label{eq:qloss}
-L_t(\theta_t) = (Q(s,a;\theta_t) - (r_t + \gamma max_{a'}Q(s',a';\theta_{t-1}))^2
+L_t(\theta_t) = (Q(s,a;\theta_t) - (r_t + \gamma \max_{a'}Q(s',a';\theta_{t-1}))^2
 \end{align}
-The loss function describes the difference between the expected future discounted return output by the \emph{Q-network} at step $$t$$, and the actual reward received at step $$t$$ ($$r_t$$) plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$; essentially, the prediction error in estimating the Q function. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
+The loss function describes the difference between the expected future discounted return output by the *Q-network* at step $$t$$, and the actual reward received at step $$t$$ ($$r_t$$) plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$; essentially, the prediction error in estimating the Q function. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
 
 While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. 
 
