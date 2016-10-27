@@ -42,9 +42,9 @@ R_t = \sum^T_{t'=t}\gamma^{t'-t}r_{t'}
 \end{align}
 
 In Q-learning, the goal is to learn a Q function that gives the maximum expected discounted future return for taking any action $$a$$ in state $$s$$, and continuing to act optimally at each step in the future. Therefore the optimal Q function, $$Q^*$$ is defined as:
-\begin{align}
+$$\begin{align}
 Q^*(s, a) = max_\pi \mathbb{E}[R_t|s_t = s, a_t = a, \pi]
-\end{align}
+\end{align}$$
 where $$\pi$$ is a policy mapping states to distributions over actions. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
 \begin{align}
 Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
@@ -60,9 +60,9 @@ The loss function describes the difference between the expected future discounte
 
 While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. 
 
-Several techniques are required for DQL to work effectively. As the agent interacts with the environment, $$<s_t,a_t,r_t,s_{t+1}>$$ tuples it experiences are stored in a \emph{replay memory}. Training the \emph{Q-network} is accomplished by randomly sampling batches from the \emph{replay memory} to compute the loss. The \emph{replay memory} is essential for learning; if the agent was trained using consecutive samples of experience (as in online Q-learning), the samples would be highly correlated, updates would have high variance, and the network parameters could become stuck in a local minimum or diverge \cite{dqn}. 
+Several techniques are required for DQL to work effectively. As the agent interacts with the environment, $$<s_t,a_t,r_t,s_{t+1}>$$ tuples it experiences are stored in a *replay memory*. Training the *Q-network* is accomplished by randomly sampling batches from the *replay memory* to compute the loss. The *replay memory* is essential for learning; if the agent was trained using consecutive samples of experience (as in online Q-learning), the samples would be highly correlated, updates would have high variance, and the network parameters could become stuck in a local minimum or diverge \cite{dqn}. 
 
-Further optimizations to the DQL algorithm have been proposed that help enhance learning and ensure stability. One of these is Deep Double Q-learning \cite{dqqn}, in which a second, \emph{Target Q-network} is used to estimate expected future return, while the \emph{Q-network} is used to $\epsilon$-greedily choose the next action. Since Q-learning has been shown to learn unrealistically high action values because it estimates maximum expected return, having a second Q-network can lead to more realistic estimates and better performance \cite{dqqn}.
+Further optimizations to the DQL algorithm have been proposed that help enhance learning and ensure stability. One of these is Deep Double Q-learning \cite{dqqn}, in which a second, *Target Q-network* is used to estimate expected future return, while the *Q-network* is used to $$\epsilon$$-greedily choose the next action. Since Q-learning has been shown to learn unrealistically high action values because it estimates maximum expected return, having a second Q-network can lead to more realistic estimates and better performance \cite{dqqn}.
 
 Melody DQN
 ----------
