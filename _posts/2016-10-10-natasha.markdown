@@ -42,9 +42,11 @@ R_t = \sum^T_{t'=t}\gamma^{t'-t}r_{t'}
 \end{align}
 
 In Q-learning, the goal is to learn a Q function that gives the maximum expected discounted future return for taking any action $$a$$ in state $$s$$, and continuing to act optimally at each step in the future. Therefore the optimal Q function, $$Q^*$$ is defined as:
+
 $$\begin{align}
 Q^*(s, a) = max_\pi \mathbb{E}[R_t|s_t = s, a_t = a, \pi]
 \end{align}$$
+
 where $$\pi$$ is a policy mapping states to distributions over actions. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
 \begin{align}
 Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
