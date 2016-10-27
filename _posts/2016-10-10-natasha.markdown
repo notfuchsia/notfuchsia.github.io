@@ -3,7 +3,8 @@ layout: post
 title: Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
 date:   2016-10-24 08:00:00 -0700
 author: natashajaques
-tags: magenta
+tags: magenta,melody,rnn,lstm,reinforcement,music
+excerpt_separator: <!--more-->
 ---
 
 
@@ -35,7 +36,7 @@ Introduction to Deep Q-Learning
 ---------------------
 In reinforcement learning (RL), an agent interacts with an environment. Given the state of the enviornment *s*, the agent takes an action *a*, receives a reward *r*, and the environment transitions to a new state, *s'*. The goal of the agent is to maximize reward, which is usually some clear signal from the environment, such as points in a game. 
 
-The rules for how the agent chooses to act in the environment define a *policy*. To learn the most effective policy, the agent cannot simply greedily maximize the reward it will receive after the next action, but must instead consider the total cumulative reward it can expect to receive over a course of actions occurring in the future. Because future rewards are typically uncertain if the environment has random effects, a discount factor of \gamma is applied to the reward for each timestep in the future. If $r_t$ is the reward received at timestep $t$, then $R_t$ is the total future discounted \emph{return}:
+The rules for how the agent chooses to act in the environment define a *policy*. To learn the most effective policy, the agent cannot simply greedily maximize the reward it will receive after the next action, but must instead consider the total cumulative reward it can expect to receive over a course of actions occurring in the future. Because future rewards are typically uncertain if the environment has random effects, a discount factor of $$\gamma$$ is applied to the reward for each timestep in the future. If $$r_t$$ is the reward received at timestep $t$, then $R_t$ is the total future discounted \emph{return}:
 $$ R_t = \sum^T_{t'=t}\gamma^{t'-t}r_{t'} $$
 
 In Q-learning, the goal is to learn a Q function that gives the maximum expected discounted future return for taking any action $a$ in state $s$, and continuing to act optimally at each step in the future. Therefore the optimal Q function, $Q^*$ is defined as:
@@ -62,3 +63,5 @@ Melody DQN
 ----------
 
 [image](/assets/rl_rnn_diagram.png)
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
