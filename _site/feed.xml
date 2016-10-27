@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Testing</title>
+    <title>Not Fuchsia</title>
     <description>Testing blog for editing.</description>
-    <link>https://douglaseck.github.io/blog/</link>
-    <atom:link href="https://douglaseck.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Oct 2016 21:13:39 +0000</pubDate>
-    <lastBuildDate>Thu, 13 Oct 2016 21:13:39 +0000</lastBuildDate>
+    <link>https://notfuchsia.github.io/</link>
+    <atom:link href="https://notfuchsia.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 13 Oct 2016 21:16:29 +0000</pubDate>
+    <lastBuildDate>Thu, 13 Oct 2016 21:16:29 +0000</lastBuildDate>
     <generator>Jekyll v3.1.4</generator>
     
       <item>
@@ -445,8 +445,8 @@ Last by not least, this work was carried out with collaborators on the &lt;a hre
 
 </description>
         <pubDate>Tue, 11 Oct 2016 15:00:00 +0000</pubDate>
-        <link>https://douglaseck.github.io/blog/2016/10/11/coconet/</link>
-        <guid isPermaLink="true">https://douglaseck.github.io/blog/2016/10/11/coconet/</guid>
+        <link>https://notfuchsia.github.io/2016/10/11/coconet/</link>
+        <guid isPermaLink="true">https://notfuchsia.github.io/2016/10/11/coconet/</guid>
         
         <category>magenta</category>
         
@@ -458,8 +458,8 @@ Last by not least, this work was carried out with collaborators on the &lt;a hre
         <description>&lt;p&gt;Body of my blog. V2.&lt;/p&gt;
 </description>
         <pubDate>Sun, 09 Oct 2016 15:00:00 +0000</pubDate>
-        <link>https://douglaseck.github.io/blog/2016/10/09/natasha/</link>
-        <guid isPermaLink="true">https://douglaseck.github.io/blog/2016/10/09/natasha/</guid>
+        <link>https://notfuchsia.github.io/2016/10/09/natasha/</link>
+        <guid isPermaLink="true">https://notfuchsia.github.io/2016/10/09/natasha/</guid>
         
         <category>magenta</category>
         
