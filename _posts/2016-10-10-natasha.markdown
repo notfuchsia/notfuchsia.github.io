@@ -89,6 +89,22 @@ forces the model to learn that the most valuable actions in terms of expected fu
 Results
 ----------
 
+| Undesirable behavior              | Note RNN | Q         | $$\Psi$$  | G         |
+|-----------------------------------|----------|-----------|-----------|-----------|
+| Notes excessively repeated        | 63.3%    | **0.0%**  | **0.02%** | **0.03%** |
+| Notes not in key                  | 0.1%     | 1.0%      | 0.6%      | 28.7%     |
+| Mean autocorrelation - lag 1      | -.16     | **-.11**  | **-.10**  | .55       |
+| Mean autocorrelation - lag 2      | .14      | **.03**   | **-.01**  | .31       |
+| Mean autocorrelation - lag 3      | -.13     | **.03**   | **.01**   | 17        |
+
+| Desirable behavior                | Note RNN | Q         | $$\Psi$$  | G         |
+|-----------------------------------|----------|-----------|-----------|-----------|
+| Leaps resolved                    | 77.2%    | **91.1%** | **90.0%** | 52.2%     |
+| Compositions starting with tonic  | 0.9%     | **28.8%** | **28.7%** | 0.0%      |
+| Compositions with unique max note | 64.7%    | 56.4%     | 59.4%     | 37.1%     |
+| Compositions with unique min note | 49.4%    | 51.9%     | **58.3%** | **56.5%** |
+| Notes in motif                    | 5.9%     | **75.7%** | **73.8%** | **69.3%** |
+| Notes in repeated motif           | 0.007%   | **0.11%** | **0.09%** | **0.01%** |
 
 | ![](/assets/rl_rnn/rewards_note_rnn.png)  | ![](/assets/rl_rnn/rewards_music_theory.png) | 
 |:---:|:---:|
@@ -96,7 +112,10 @@ Results
 
 | ![](/assets/rl_rnn/note_rnn.png)  | ![](/assets/rl_rnn/q.png) | ![](/assets/rl_rnn/psi.png) | ![](/assets/rl_rnn/g.png) |
 |:---:|:---:|:---:|:---:|
-| Note RNN | Q | Psi | G |
+| Note RNN | Q | $$\Psi$$ | G |
+
+How to use the code
+-------------------
 
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
