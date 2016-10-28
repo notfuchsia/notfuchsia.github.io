@@ -7,7 +7,12 @@ tags: magenta,melody,rnn,lstm,reinforcement,music
 excerpt_separator: <!--more-->
 ---
 
-When I joined [Magenta][magenta] as an intern this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate monophonic sequences of notes. As you may remember from [previous posts](elliot post), these models typically consist of a Long Short-Term Memory (LSTM) network
+When I joined [Magenta][magenta] as an intern this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate sequences of notes. As you may remember from [previous posts][elliot post], these models typically consist of a Long Short-Term Memory (LSTM) network trained on monophonic melodies. This means that melodies are fed into the network one note at a time, and it is trained to predict the next note in the sequence. The figure below shows a simplified version of this type of network unrolled over time, in which it is being trained on the first 6 notes of "Twinkle Twinkle Little Star". From now on, I'll refer to this type of model as a **Note RNN**.
+
+![Note RNN model](/assets/rl_rnn/note_rnn_model.png "Note RNN model")
+
+
+
 Frustrating limitation of LSTMs
 Check out this character RNN producing sentences
 Sentences lose track of where they were going, paragraphs are not about a consistent topic
@@ -22,27 +27,6 @@ non differentiable
 points in a game 
 
 This post will give an introduction to the **SWEETNAMEHERE** model. [Code](our code) to run this model has recently been posted to the Magenta github; the code will be explained in detail at the end of this post in case you would like to try it for yourself! Finally, there is also a recent [arxiv paper](our arxiv) describing this work in detail, written by myself, Shane Gu, Richard E. Turner, and Douglas Eck. A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop](nips rl). 
-
-Music Theory Rewards
---------------------
-
-* **Stay in key**: Notes should belong to the same key. For example, if the desired key is C-major, a B-flat would not be an acceptable note. 
-
-* **Begin and end with the tonic note**: The first note of the composition, and the first note of the final bar should be the tonic note of the key; e.g. if the key is C-major, this note would be middle C, or 14 in our encoding. 
-
-* **Avoid excessively repeated notes**: Unless a rest is introduced or a note is held, a single tone should not be repeated more than four times in a row. While the number four can be considered a rough heuristic, avoiding excessively repeated notes and static melodic contours is Gauldin's first rule of melodic composition \cite{gauldin1995practical}.
-
-* **Prefer harmonious intervals**: The composition should avoid awkward intervals like augmented sevenths, or large jumps of more than an octave. Since "a mixture of motion by both step and leap is preferred, with some tendency towards the former", both small steps and larger harmonic intervals are rewarded, but the reward for smaller steps is somewhat higher. 
-
-*  **Resolve large leaps**: When the composition leaps several pitches in one direction, it should eventually be resolved by a leap back or gradual movement in the opposite direction. Leaping twice in the same direction is negatively rewarded. 
-
-*  **Avoid continuously repeating extrema notes**: The highest note of the composition should be unique, as should the lowest note. 
-
-*  **Avoid high auto-correlation**: To encourage variety, the reward function penalizes a melody if it is highly correlated with itself at a lag of 1, 2, or 3 beats. 
-
-*  **Play motifs**: A musical motif is a succession of notes representing the shortest musical "idea"; in our implementation, it is defined as a bar of music with three or more unique notes. 
-
-*  **Play repeated motifs**: Because repetition has been shown to be key to emotional engagement with music \cite{livingstone}, we sought to train the model to repeat motifs that it had previously introduced. 
 
 Introduction to Deep Q-Learning
 ---------------------
@@ -84,19 +68,44 @@ Tune DQN
 ![Model diagram](/assets/rl_rnn/rl_rnn_diagram.png "Model diagram")
 
 The total reward given at time $$t$$ is therefore: 
+
 $$\begin{align} 
 \label{eq:reward}
 r(s,a) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
 \end{align}$$
-where $$c$$ is a constant controlling the emphasis placed on the music theory reward. Given the DQN loss function in Eq. $$\ref{eq:qloss}$$ and modified reward function in Eq. $$\ref{eq:reward}$$, the new loss function and learned policy for our model are,
+
+where $$c$$ is a constant controlling the emphasis placed on the music theory reward. Given the DQN loss function in Eq. ? and modified reward function in Eq. ?, the new loss function and learned policy for our model are,
+
 $$\begin{align}
 \label{eq:melody_dqn_loss}
 &L(\theta)= \mathbb{E}_\beta[(\log p(a|s) + \frac{1}{c}r_{MT}(a,s) + \gamma \max_{a'}Q(s',a';\theta^-) - Q(s,a;\theta))^2]\\
-\label{eq:melody_dqn_policy}
-&\pi_\theta(a|s) = \delta(a = \arg\max_{a}Q(s,a;\theta)) 
 \end{align}$$
+
 Thus, the modified loss function
 forces the model to learn that the most valuable actions in terms of expected future rewards are those that conform to the music theory rules, but still have the high probability in the original data.
+
+
+Music Theory Rewards
+--------------------
+
+* **Stay in key**: Notes should belong to the same key. For example, if the desired key is C-major, a B-flat would not be an acceptable note. 
+
+* **Begin and end with the tonic note**: The first note of the composition, and the first note of the final bar should be the tonic note of the key; e.g. if the key is C-major, this note would be middle C, or 14 in our encoding. 
+
+* **Avoid excessively repeated notes**: Unless a rest is introduced or a note is held, a single tone should not be repeated more than four times in a row. While the number four can be considered a rough heuristic, avoiding excessively repeated notes and static melodic contours is Gauldin's first rule of melodic composition \cite{gauldin1995practical}.
+
+* **Prefer harmonious intervals**: The composition should avoid awkward intervals like augmented sevenths, or large jumps of more than an octave. Since "a mixture of motion by both step and leap is preferred, with some tendency towards the former", both small steps and larger harmonic intervals are rewarded, but the reward for smaller steps is somewhat higher. 
+
+*  **Resolve large leaps**: When the composition leaps several pitches in one direction, it should eventually be resolved by a leap back or gradual movement in the opposite direction. Leaping twice in the same direction is negatively rewarded. 
+
+*  **Avoid continuously repeating extrema notes**: The highest note of the composition should be unique, as should the lowest note. 
+
+*  **Avoid high auto-correlation**: To encourage variety, the reward function penalizes a melody if it is highly correlated with itself at a lag of 1, 2, or 3 beats. 
+
+*  **Play motifs**: A musical motif is a succession of notes representing the shortest musical "idea"; in our implementation, it is defined as a bar of music with three or more unique notes. 
+
+*  **Play repeated motifs**: Because repetition has been shown to be key to emotional engagement with music \cite{livingstone}, we sought to train the model to repeat motifs that it had previously introduced. 
+
 
 Results
 ----------
