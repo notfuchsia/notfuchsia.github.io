@@ -66,10 +66,10 @@ Several techniques are required for DQL to work effectively. As the agent intera
 
 Further optimizations to the DQL algorithm have been proposed that help enhance learning and ensure stability. One of these is Deep Double Q-learning \cite{dqqn}, in which a second, *Target Q-network* is used to estimate expected future return, while the *Q-network* is used to $$\epsilon$$-greedily choose the next action. Since Q-learning has been shown to learn unrealistically high action values because it estimates maximum expected return, having a second Q-network can lead to more realistic estimates and better performance \cite{dqqn}.
 
-Melody DQN
+Tune DQN
 ----------
 
-![Model diagram](/assets/rl_rnn_diagram.png "Model diagram")
+![Model diagram](/assets/rl_rnn/rl_rnn_diagram.png "Model diagram")
 
 The total reward given at time $t$ is therefore: 
 $$\begin{align} 
@@ -85,6 +85,12 @@ $$\begin{align}$$
 $$\end{align}$$
 Thus, the modified loss function
 forces the model to learn that the most valuable actions in terms of expected future rewards are those that conform to the music theory rules, but still have the high probability in the original data.
+
+Results
+----------
+Note RNN                         |  Q                         |  Psi                         |  G                         |
+:-------------------------------:|:--------------------------:|:----------------------------:|:--------------------------:|
+![](/assets/rl_rnn/note_rnn.png) |  ![](/assets/rl_rnn/q.png) |  ![](/assets/rl_rnn/psi.png) |  ![](/assets/rl_rnn/g.png) |
 
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
