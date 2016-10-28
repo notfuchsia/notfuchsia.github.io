@@ -76,19 +76,23 @@ $$\begin{align}
 \label{eq:reward}
 r(s,a) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
 \end{align}$$
-where $$c$$ is a constant controlling the emphasis placed on the music theory reward. Given the DQN loss function in Eq. $$\ref{eq:qloss}$$ and modified reward function in Eq. \ref{eq:reward}, the new loss function and learned policy for our model are,
-$$\begin{align}$$
+where $$c$$ is a constant controlling the emphasis placed on the music theory reward. Given the DQN loss function in Eq. $$\ref{eq:qloss}$$ and modified reward function in Eq. $$\ref{eq:reward}$$, the new loss function and learned policy for our model are,
+$$\begin{align}
 \label{eq:melody_dqn_loss}
 &L(\theta)= \mathbb{E}_\beta[(\log p(a|s) + \frac{1}{c}r_{MT}(a,s) + \gamma \max_{a'}Q(s',a';\theta^-) - Q(s,a;\theta))^2]\\
 \label{eq:melody_dqn_policy}
 &\pi_\theta(a|s) = \delta(a = \arg\max_{a}Q(s,a;\theta)) 
-$$\end{align}$$
+\end{align}$$
 Thus, the modified loss function
 forces the model to learn that the most valuable actions in terms of expected future rewards are those that conform to the music theory rules, but still have the high probability in the original data.
 
 Results
 ----------
 
+
+| ![](/assets/rl_rnn/rewards_note_rnn.png)  | ![](/assets/rl_rnn/rewards_music_theory.png) | 
+|:---:|:---:|
+| Note RNN rewards | Music theory rewards |
 
 | ![](/assets/rl_rnn/note_rnn.png)  | ![](/assets/rl_rnn/q.png) | ![](/assets/rl_rnn/psi.png) | ![](/assets/rl_rnn/g.png) |
 |:---:|:---:|:---:|:---:|
