@@ -9,9 +9,7 @@ excerpt_separator: <!--more-->
 
 When I joined [Magenta][magenta] as an intern this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate sequences of notes. As you may remember from [previous posts][elliot post], these models typically consist of a Long Short-Term Memory (LSTM) network trained on monophonic melodies. This means that melodies are fed into the network one note at a time, and it is trained to predict the next note in the sequence. The figure below shows a simplified version of this type of network unrolled over time, in which it is being trained on the first 6 notes of "Twinkle Twinkle Little Star". From now on, I'll refer to this type of model as a **Note RNN**.
 
-![Note RNN model](/assets/rl_rnn/note_rnn_model.png "Note RNN model" = 256x)
-
-
+![Note RNN model](/assets/rl_rnn/note_rnn_model.png =256x)
 
 Frustrating limitation of LSTMs
 Check out this character RNN producing sentences
