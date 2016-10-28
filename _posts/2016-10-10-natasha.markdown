@@ -11,6 +11,8 @@ excerpt_separator: <!--more-->
 This will be an introduction discussing limitations of LSTMs
 Any human music student gets taught concepts of music theory!
 
+[arxiv paper](our arxiv) coming soon
+
 Music Theory Rewards
 --------------------
 
@@ -117,6 +119,18 @@ Results
 How to use the code
 -------------------
 
+
+Acknowledgements
+----------------
+This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck](doug). Many thanks also go to my wonderful collaborators on the [Magenta](magenta) team in [Google Brain](brain), and in particular [Kyle Kastner](kastner) for his knowledgeable insights and handy spectrogram-movie-producing code. 
+
+[our arxiv]: https://arxiv.org/abs/comingsoon
+
+[doug]: http://research.google.com/pubs/author39086.html
+[kastner]: http://kastnerkyle.github.io/
+[brain]: http://research.google.com/teams/brain/
+[tensorflow]: https://www.tensorflow.org/
+[magenta]: https://magenta.tensorflow.org/
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
