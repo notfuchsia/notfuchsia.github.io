@@ -7,11 +7,21 @@ tags: magenta,melody,rnn,lstm,reinforcement,music
 excerpt_separator: <!--more-->
 ---
 
+When I joined [Magenta](magenta) this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate monophonic sequences of notes. As you may remember from [previous posts](elliot post)
+Frustrating limitation of LSTMs
+Check out this character RNN producing sentences
+Sentences lose track of where they were going, paragraphs are not about a consistent topic
+This happens with music too... melodies wander and do not repeat, lack a consistent global structure
 
-This will be an introduction discussing limitations of LSTMs
+I thought to myself that this was an unfair expectation. 
 Any human music student gets taught concepts of music theory!
+Another way to look at this is that music is an interesting test-bed for sequence generation, because musical compositions adhere to a relatively well-defined set of structural rules. 
 
-[arxiv paper](our arxiv) coming soon
+Reinforcement learning can be used to 
+non differentiable
+points in a game 
+
+This post will give an introduction to the **SWEETNAMEHERE** model. [Code](our code) to run this model has recently been posted to the Magenta github; the code will be explained in detail at the end of this post in case you would like to try it for yourself! Finally, there is also a recent [arxiv paper](our arxiv) describing this work in detail, written by myself, Shane Gu, Richard E. Turner, and Douglas Eck. A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop](nips rl). 
 
 Music Theory Rewards
 --------------------
@@ -126,6 +136,9 @@ This work was done in collaboration with Shane Gu, Richard E. Turner, and [Dougl
 
 [our arxiv]: https://arxiv.org/abs/comingsoon
 
+[elliot post]: https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/
+[model code]: https://github.com/tensorflow/magenta/tree/master/magenta/models/SWEETNAMEHERE
+[nips rl]: https://sites.google.com/site/deeprlnips2016/
 [doug]: http://research.google.com/pubs/author39086.html
 [kastner]: http://kastnerkyle.github.io/
 [brain]: http://research.google.com/teams/brain/
