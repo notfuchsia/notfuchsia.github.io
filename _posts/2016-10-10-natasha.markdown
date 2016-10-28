@@ -7,7 +7,7 @@ tags: magenta,melody,rnn,lstm,reinforcement,music
 excerpt_separator: <!--more-->
 ---
 
-When I joined [Magenta](magenta) this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate monophonic sequences of notes. As you may remember from [previous posts](elliot post)
+When I joined [Magenta][magenta] as an intern this summer, the team was hard at work on developing better ways to train Recurrent Neural Networks (RNNs) to generate monophonic sequences of notes. As you may remember from [previous posts](elliot post), these models typically consist of a Long Short-Term Memory (LSTM) network
 Frustrating limitation of LSTMs
 Check out this character RNN producing sentences
 Sentences lose track of where they were going, paragraphs are not about a consistent topic
@@ -132,7 +132,7 @@ How to use the code
 
 Acknowledgements
 ----------------
-This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck](doug). Many thanks also go to my wonderful collaborators on the [Magenta](magenta) team in [Google Brain](brain), and in particular [Kyle Kastner](kastner) for his knowledgeable insights and handy spectrogram-movie-producing code. 
+This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular [Kyle Kastner][kastner] for his knowledgeable insights and handy spectrogram-movie-producing code. 
 
 [our arxiv]: https://arxiv.org/abs/comingsoon
 
