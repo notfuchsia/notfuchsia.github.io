@@ -71,7 +71,7 @@ Tune DQN
 
 ![Model diagram](/assets/rl_rnn/rl_rnn_diagram.png "Model diagram")
 
-The total reward given at time $t$ is therefore: 
+The total reward given at time $$t$$ is therefore: 
 $$\begin{align} 
 \label{eq:reward}
 r(s,a) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
@@ -88,9 +88,11 @@ forces the model to learn that the most valuable actions in terms of expected fu
 
 Results
 ----------
-Note RNN                         |  Q                         |  Psi                         |  G                         |
-:-------------------------------:|:--------------------------:|:----------------------------:|:--------------------------:|
-![](/assets/rl_rnn/note_rnn.png) |  ![](/assets/rl_rnn/q.png) |  ![](/assets/rl_rnn/psi.png) |  ![](/assets/rl_rnn/g.png) |
+
+
+| ![](/assets/rl_rnn/note_rnn.png)  | ![](/assets/rl_rnn/q.png) | ![](/assets/rl_rnn/psi.png) | ![](/assets/rl_rnn/g.png) |
+|:---:|:---:|:---:|:---:|
+| Note RNN | Q | Psi | G |
 
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
