@@ -15,6 +15,7 @@ When I joined [Magenta][magenta] as an intern this summer, the team was hard at 
 
 >The '''Rebellion''' (''Hyerodent'') is \[\[literal\]\], related mildly older than old half sister, the music, and morrow been much more propellent. All those of \[\[Hamas (mass)\|sausage trafficking\]\]s were also known as \[\[Trip class submarine|"Sante" at Serassim\]\]; "Verra" as 1865-682-831 is related to ballistic missiles. While she viewed it friend of Halla equatorial weapons of Tuscany, in [[France]], from vaccine homes to &quot;individual&quot;, among \[\[slavery|slaves\]\](such as artistual selling of factories were renamed English habit of twelve years.) 
 
+While the model has learned how to correctly spell English words, some markdown syntax, and even  mostly correct grammatical structure, it wonders rapidly from topic to topic, discussing everything from sisters to submarines to Tuscany, slavery, and factories, all in one short paragraph. This type of global incoherence is typical of the melodies produced by a vanilla *Note RNN* as well. They do not maintain a consistent musical structure 
 Frustrating limitation of LSTMs
 Check out this character RNN producing sentences
 Sentences lose track of where they were going, paragraphs are not about a consistent topic
