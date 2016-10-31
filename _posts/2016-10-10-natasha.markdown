@@ -137,7 +137,7 @@ Results
 			<th style="text-align:left"> Behavior   </th>
 			<th style="text-align:left"> Note RNN </th>
 			<th style="text-align:left"> Q   </th>
-			<th style="text-align:left"> $$\Psi$$ </th>
+			<th style="text-align:left"> Psi </th>
 			<th style="text-align:left"> G </th>
 		</tr>
 	</thead>
