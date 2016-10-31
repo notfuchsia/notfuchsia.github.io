@@ -48,14 +48,14 @@ where $$\pi$$ is a policy mapping states to distributions over actions. To learn
 \begin{align}
 Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
 \end{align}
-where *r* is the reward received for taking action *a* in state *s*. This value iteration method will converge to $$Q^*$$ as $$i \rightarrow \infty$$ \cite{sutton}.
+where *r* is the reward received for taking action *a* in state *s*. This value iteration method will converge to $$Q^*$$ as $$i \rightarrow \infty$$.
 
 In [Deep Q Learning][dqn], a neural network called the Deep Q-network (DQN) is used to approximate the Q function, $$Q(s, a; \theta) \approx Q^*(s, a)$$. The network parameters $$\theta$$ are learned by applying stochastic gradient descent (SGD) updates with respect to the following loss function:
 \begin{align} 
 \label{eq:qloss}
-L_t(\theta_t) = (Q(s,a;\theta_t) - (r_t + \gamma \max_{a'}Q(s',a';\theta_{t-1}))^2
+L_t(\theta_t) = (r_t + \gamma \max_{a'}Q(s',a';\theta_{t-1}) - Q(s,a;\theta_t))^2
 \end{align}
-The loss function describes the difference between the expected future discounted return output by the *Q-network* at step $$t$$, and the actual reward received at step $$t$$ ($$r_t$$) plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$; essentially, the prediction error in estimating the Q function. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
+The loss function describes the difference between the actual reward received at step $$t$$ ($$r_t$$) plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$, and the expected future discounted return output by the *Q-network* at step $$t$$. Essentially, this is the prediction error in estimating the $$Q$$ function made by the *Q-network*. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
 
 <!--While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. -->
 
@@ -76,15 +76,18 @@ $$\begin{align}
 r(s,a) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
 \end{align}$$
 
-where $$c$$ is a constant controlling the emphasis placed on the music theory reward. Given the DQN loss function in Eq. ? and modified reward function in Eq. ?, the new loss function and learned policy for our model are,
+where $$c$$ is a constant controlling the emphasis placed on the music theory reward. So now, we see that the new loss function for our model is:
 
 $$\begin{align}
 \label{eq:melody_dqn_loss}
-&L(\theta)= \mathbb{E}_\beta[(\log p(a|s) + \frac{1}{c}r_{MT}(a,s) + \gamma \max_{a'}Q(s',a';\theta^-) - Q(s,a;\theta))^2]\\
+L_t(\theta_t) = (\log p(a|s) + \frac{1}{c}r_{MT}(a,s) + \gamma \max_{a'}Q(s',a';\theta_{t-1}) - Q(s,a;\theta_t))^2
 \end{align}$$
 
-Thus, the modified loss function
-forces the model to learn that the most valuable actions in terms of expected future rewards are those that conform to the music theory rules, but still have the high probability in the original data.
+Thus, the modified loss function forces the model to learn that the most valuable actions are those that conform to the music theory rules, but still have the high probability in the original data.
+
+## For the mathematically inclined...
+
+In [our paper][our arxiv] we 
 
 
 Music Theory Rewards
