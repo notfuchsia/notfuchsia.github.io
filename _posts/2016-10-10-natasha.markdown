@@ -23,20 +23,17 @@ This is the idea behind the **RL Tuner** model I will describe in this post. We 
 
 We show that this approach allows the model to maintain high $$\log p(a$$&#124;$$s)$$ values, while significantly improving the behaviors of the *Note RNN* targeted by the music theory rewards. For example, before training with RL, 63.3% of notes produced by the *Note RNN* belonged to some excessively repeated segment of notes; after RL, 0.0-0.03% of notes were excessively repeated. Since excessively repeating tokens is a problem in other domains as well (e.g. text generation), we believe our approach could have broader applications. But does it actually work to produce better music? We conducted a user study and found that people find the compositions produced by our three RL models significantly more musically pleasing than those of the original *Note RNN*. But we encourage you to judge for yourself; samples from each of the models will be provided later in this post.
 
-The models, derivations, and results are all described in our recent [research paper][our arxiv], written by myself, Shane Gu, Richard E. Turner, and Douglas Eck<sup>[1](#footnote-nipsrl)</sup>. [Code][code] to run this model is also available on the Magenta github repo; please try it out! The music theory rules implemented for the model are only a first attempt, and could easily be improved by someone with musical training!
+The models, derivations, and results are all described in our recent [research paper][our arxiv], written by myself, Shane Gu, Richard E. Turner, and Douglas Eck<sup>[1](#footnote-nipsrl)</sup>. [Code][code] to run this model is also available on the Magenta github repo; please try it out! The music theory rules implemented for the model are only a first attempt, and could easily be improved by someone with musical training.
 
 <a name="footnote-nipsrl"><sub><sup>1</sup></sub></a> <sub><sup>A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop][nips rl].</sup></sub> 
 
 Introduction to Reinforcement Learning and Deep Q-Learning
 ----------------------------------------------------------
-This section will give a brief introduction to some ideas behind RL and Deep Q Networks (DQNs). Those of you familiar with these topics may wish to skip ahead. 
-
-non differentiable
-points in a game 
+*This section will give a brief introduction to some ideas behind RL and Deep Q Networks (DQNs). Those of you familiar with these topics may wish to skip ahead.*
 
 In reinforcement learning (RL), an agent interacts with an environment. Given the state of the enviornment $$s$$, the agent takes an action $$a$$, receives a reward $$r$$, and the environment transitions to a new state, $$s'$$. The goal of the agent is to maximize reward, which is usually some clear signal from the environment, such as points in a game. 
 
-The rules for how the agent chooses to act in the environment define a *policy*. To learn the most effective policy, the agent cannot simply greedily maximize the reward it will receive after the next action, but must instead consider the total cumulative reward it can expect to receive over a course of actions occurring in the future. Because future rewards are typically uncertain if the environment has random effects, a discount factor of $$\gamma$$ is applied to the reward for each timestep in the future. If $$r_t$$ is the reward received at timestep $$t$$, then $$R_t$$ is the total future discounted *return*:
+The rules for how the agent chooses to act in the environment define a *policy*. To learn the most effective policy, the agent can't just greedily maximize the reward it will receive after the next action, but must instead consider the total cumulative reward it can expect to receive over a course of actions occurring in the future. Because future rewards are typically uncertain if the environment has random effects, a discount factor of $$\gamma$$ is applied to the reward for each timestep in the future. If $$r_t$$ is the reward received at timestep $$t$$, then $$R_t$$ is the total future discounted *return*:
 \begin{align}
 R_t = \sum^T_{t'=t}\gamma^{t'-t}r_{t'} 
 \end{align}
@@ -53,20 +50,20 @@ Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
 \end{align}
 where *r* is the reward received for taking action *a* in state *s*. This value iteration method will converge to $$Q^*$$ as $$i \rightarrow \infty$$ \cite{sutton}.
 
-In Deep Q Learning (DQL) \cite{dqn}, a neural network called the *Q-network* is used to approximate the Q function, $$Q(s, a; \theta) \approx Q^*(s, a)$$. The network parameters $$\theta$$ are learned by applying stochastic gradient descent (SGD) updates with respect to the following loss function:
+In [Deep Q Learning][dqn], a neural network called the Deep Q-network (DQN) is used to approximate the Q function, $$Q(s, a; \theta) \approx Q^*(s, a)$$. The network parameters $$\theta$$ are learned by applying stochastic gradient descent (SGD) updates with respect to the following loss function:
 \begin{align} 
 \label{eq:qloss}
 L_t(\theta_t) = (Q(s,a;\theta_t) - (r_t + \gamma \max_{a'}Q(s',a';\theta_{t-1}))^2
 \end{align}
 The loss function describes the difference between the expected future discounted return output by the *Q-network* at step $$t$$, and the actual reward received at step $$t$$ ($$r_t$$) plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$; essentially, the prediction error in estimating the Q function. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
 
-While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. 
+<!--While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. -->
 
-Several techniques are required for DQL to work effectively. As the agent interacts with the environment, $$<s_t,a_t,r_t,s_{t+1}>$$ tuples it experiences are stored in a *replay memory*. Training the *Q-network* is accomplished by randomly sampling batches from the *replay memory* to compute the loss. The *replay memory* is essential for learning; if the agent was trained using consecutive samples of experience (as in online Q-learning), the samples would be highly correlated, updates would have high variance, and the network parameters could become stuck in a local minimum or diverge \cite{dqn}. 
+Several techniques are required for a DQN to work effectively. As the agent interacts with the environment, $$<s_t,a_t,r_t,s_{t+1}>$$ tuples it experiences are stored in an *experience buffer*. Training the *Q-network* is accomplished by randomly sampling batches from the *experience buffer* to compute the loss. The *experience buffer* is essential for learning; if the agent was trained using consecutive samples of experience (as in online Q-learning), the samples would be highly correlated, updates would have high variance, and the network parameters could become stuck in a local minimum or diverge. 
 
-Further optimizations to the DQL algorithm have been proposed that help enhance learning and ensure stability. One of these is Deep Double Q-learning \cite{dqqn}, in which a second, *Target Q-network* is used to estimate expected future return, while the *Q-network* is used to $$\epsilon$$-greedily choose the next action. Since Q-learning has been shown to learn unrealistically high action values because it estimates maximum expected return, having a second Q-network can lead to more realistic estimates and better performance \cite{dqqn}.
+Further optimizations to the DQN algorithm have been proposed that help enhance learning and ensure stability. One of these is [Deep Double Q-learning][dqqn], in which a second, *Target Q-network* is used to estimate expected future return, while the *Q-network* is used to choose the next action. Since Q-learning has been shown to learn unrealistically high action values because it estimates maximum expected return, having a second Q-network can lead to more realistic estimates and better performance.
 
-Tune DQN
+RL Tuner
 ----------
 
 ![Model diagram](/assets/rl_rnn/rl_rnn_diagram.png "Model diagram")
@@ -156,6 +153,7 @@ This work was done in collaboration with Shane Gu, Richard E. Turner, and [Dougl
 [g learning]: https://arxiv.org/pdf/1512.08562.pdf
 [psi learning]: http://homepages.inf.ed.ac.uk/svijayak/publications/rawlik-RSS2012.pdf
 [dqn]: https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
+[dqqn]: http://www.aaai.org/Conferences/AAAI/2016/Papers/12vanHasselt12389.pdf
 
 <!-- External links -->
 [elliot song]: https://cdn2.vox-cdn.com/uploads/chorus_asset/file/6577761/Google_-_Magenta_music_sample.0.mp3
