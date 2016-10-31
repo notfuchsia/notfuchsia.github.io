@@ -176,62 +176,42 @@ Results
 		<td> 52.2% </td>
 	</tr>
 	<tr>
-		<td> Leaps resolved   </td>
-		<td> 77.2% </td>
-		<td> <strong>91.1%</strong> </td>
-		<td> <strong>90.0%</strong> </td>
-		<td> 52.2% </td>
+		<td> Compositions starting with tonic   </td>
+		<td> 0.9% </td>
+		<td> <strong>28.8%</strong> </td>
+		<td> <strong>28.7%</strong> </td>
+		<td> 0.0% </td>
 	</tr>
 	<tr>
-		<td> Notes not in key   </td>
-		<td> 0.1% </td>
-		<td> 1.0% </td>
-		<td> 0.6% </td>
-		<td> 28.7% </td>
+		<td> Compositions with unique max note   </td>
+		<td> 64.7% </td>
+		<td> 56.4% </td>
+		<td> 59.4% </td>
+		<td> 37.1% </td>
+	</tr>
+		<tr>
+		<td> Compositions with unique min note   </td>
+		<td> 49.4% </td>
+		<td> 51.9% </td>
+		<td> <strong>58.3%</strong> </td>
+		<td> <strong>56.5%</strong> </td>
 	</tr>
 	<tr>
-		<td> Notes excessively repeated   </td>
-		<td> 63.3% </td>
-		<td> <strong>0.0%</strong> </td>
-		<td> <strong>0.02%</strong> </td>
-		<td> <strong>0.03%</strong> </td>
+		<td> Notes in motif   </td>
+		<td> 5.9% </td>
+		<td> <strong>75.7%</strong> </td>
+		<td> <strong>73.8%</strong> </td>
+		<td> <strong>69.3%</strong> </td>
 	</tr>
 	<tr>
-		<td> Notes excessively repeated   </td>
-		<td> 63.3% </td>
-		<td> <strong>0.0%</strong> </td>
-		<td> <strong>0.02%</strong> </td>
-		<td> <strong>0.03%</strong> </td>
+		<td> Notes in repeated motif   </td>
+		<td> 0.007% </td>
+		<td> <strong>0.11%</strong> </td>
+		<td> <strong>0.09%</strong> </td>
+		<td> <strong>0.01%</strong> </td>
 	</tr>
 </table>
 
-
-<table>
-	<thead style="border-bottom:1px">
-		<tr style="border-bottom:1px solid black;">
-			<th> Undesirable behavior   </th>
-			<th> Note RNN </th>			
-			<th> Q   </th>
-			<th> $$\Psi$$ </th>
-			<th> G </th>
-		</tr>
-	</thead>
-	<tr>
-		<td> Notes excessively repeated   </td>
-		<td> 63.3% </td>
-		<td> **0.0%** </td>
-		<td> **0.02%** </td>
-		<td> **0.03%** </td>
-	</tr>
-</table>
-
-| Undesirable behavior              | Note RNN | Q         | $$\Psi$$  | G         |
-|-----------------------------------|----------|-----------|-----------|-----------|
-| Notes excessively repeated        | 63.3%    | **0.0%**  | **0.02%** | **0.03%** |
-| Notes not in key                  | 0.1%     | 1.0%      | 0.6%      | 28.7%     |
-| Mean autocorrelation - lag 1      | -.16     | **-.11**  | **-.10**  | .55       |
-| Mean autocorrelation - lag 2      | .14      | **.03**   | **-.01**  | .31       |
-| Mean autocorrelation - lag 3      | -.13     | **.03**   | **.01**   | .17        |
 
 | Desirable behavior                | Note RNN | Q         | $$\Psi$$  | G         |
 |-----------------------------------|----------|-----------|-----------|-----------|
