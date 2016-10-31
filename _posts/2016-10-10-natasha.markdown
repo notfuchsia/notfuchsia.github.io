@@ -73,7 +73,7 @@ To formulate musical composition as an RL problem, we treat choosing the next no
 
 $$\begin{align} 
 \label{eq:reward}
-r(s,a) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
+r_t(a,s) = \log p(a|s) + \frac{1}{c}r_{MT}(a,s)
 \end{align}$$
 
 where $$c$$ is a constant controlling the emphasis placed on the music theory reward. So now, we see that the new loss function for our model is:
@@ -83,12 +83,27 @@ $$\begin{align}
 L_t(\theta_t) = (\log p(a|s) + \frac{1}{c}r_{MT}(a,s) + \gamma \max_{a'}Q(s',a';\theta_{t-1}) - Q(s,a;\theta_t))^2
 \end{align}$$
 
-Thus, the modified loss function forces the model to learn that the most valuable actions are those that conform to the music theory rules, but still have the high probability in the original data.
+This modified loss function forces the model to learn that the most valuable actions are those that conform to the music theory rules, but still have the high probability in the original data.
 
-## For the mathematically inclined...
+### For the mathematically inclined...
 
-In [our paper][our arxiv] we 
+In [our paper][our arxiv] we show that the loss function described above can be related to Stochastic Optimal Control, which defines an RL problem in which KL-divergence from a prior policy is penalized. If we think of the probabilities learned by the *Note RNN* as the prior policy, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
 
+\begin{align} 
+L_v(\theta) &= \mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||p(\cdot|s_t)]]
+\end{align}
+
+This is not exactly the same as our method, because we are missing the entropy term in the KL-divergence function. This led us to implement two other KL-regularized variants of Q-learning: [$$\Psi$$ learning][psi learning], and [G learning][g learning]. The loss function for $$\Psi$$ learning is:
+
+\begin{align} 
+&L(\theta)= \mathbb{E}[(\log p(a|s) + \frac{1}{c}r_{MT}(s,a) + \gamma \log \sum_{a'} e^{\Psi(s',a';\theta^-)} - \Psi(s,a;\theta))^2]
+\end{align}
+
+And the loss function for G learning is:
+
+\begin{align} 
+&L(\theta)= \mathbb{E}_\beta[(\frac{1}{c}r_{MT}(s,a)+ \gamma \log \sum_{a'} e^{\log p(a'|s')+G(s',a';\theta^-)} - G(s,a;\theta))^2]
+\end{align}
 
 Music Theory Rewards
 --------------------
