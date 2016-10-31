@@ -222,7 +222,7 @@ These results show that the targeted behaviors have significantly improved in th
 
 Even so, it's not clear that learning this somewhat arbitrary set of music theory rules will lead to better sounding compositions. To find out whether the models have improved over the original *Note RNN*, we asked Mechanical Turk workers to 
 
-<div style="text-align:center"><img src="/assets/rl_tuner/note_rnn_model.png" width="256"></div>
+<div style="text-align:center"><img src="/assets/rl_tuner/user_study.png" width="400"></div>
 
 | <iframe width="560" height="315" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe>  | <iframe width="560" height="315" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe> | 
 |:---:|:---:|
