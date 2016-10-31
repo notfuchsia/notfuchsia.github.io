@@ -17,19 +17,20 @@ When I joined [Magenta][magenta] as an intern this summer, the team was hard at 
 
 While the model has learned how to correctly spell English words, some markdown syntax, and even  mostly correct grammatical structure, sentences don't seem to follow a consistent thought. The text wonders rapidly from topic to topic, discussing everything from sisters to submarines to Tuscany, slavery, and factories, all in one short paragraph. This type of global incoherence is typical of the melodies produced by a vanilla *Note RNN* as well. They do not maintain a consistent musical structure, and can sound wandering and random. 
 
+Music is an interesting test-bed for sequence generation, in that musical compositions adhere to a relatively well-defined set of structural rules. Any beginning music student learns that groups of notes belong to keys, chords follow progressions, and songs have consistent structures made up of musical phrases. So what if we could teach a *Note RNN* these kinds of musical rules, while still allowing it to learn patterns from music it hears in the world? 
 
-I thought to myself that this was an unfair expectation. 
-Any human music student gets taught concepts of music theory!
-Another way to look at this is that music is an interesting test-bed for sequence generation, because musical compositions adhere to a relatively well-defined set of structural rules. 
+This is the idea behind the **RL Tuner** model I will describe in this post. We take a trained *Note RNN* and teach it concepts of music theory using Reinforcement Learning (RL). RL can allow a network to learn some non-differentiable *reward* function. In this case, we define a set of music theory rules and produce rewards based on whether the model's compositions adhere to those rules. However, to ensure that the model can remember the note probabilities it originally learned from data, we keep a second, fixed copy of the *Note RNN* which we call the *Reward RNN*. The *Reward RNN* is used to compute $$p(a|s)$$, the probability of playing the next note as learned by the original *Note RNN*. We augment our music theory rewards with $$p(a|s)$$, so that the total reward reflects both our music theory constraints and information learned from data.
 
+
+
+This post will give an introduction to the **RL Tuner** model. [Code](our code) to run this model has recently been posted to the Magenta github; the code will be explained in detail at the end of this post in case you would like to try it for yourself! Finally, there is also a recent [arxiv paper](our arxiv) describing this work in detail, written by myself, Shane Gu, Richard E. Turner, and Douglas Eck. A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop](nips rl). 
+
+Introduction to Reinforcement Learning and Deep Q-Learning
+----------------------------------------------------------
 Reinforcement learning can be used to 
 non differentiable
 points in a game 
 
-This post will give an introduction to the **SWEETNAMEHERE** model. [Code](our code) to run this model has recently been posted to the Magenta github; the code will be explained in detail at the end of this post in case you would like to try it for yourself! Finally, there is also a recent [arxiv paper](our arxiv) describing this work in detail, written by myself, Shane Gu, Richard E. Turner, and Douglas Eck. A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop](nips rl). 
-
-Introduction to Deep Q-Learning
----------------------
 In reinforcement learning (RL), an agent interacts with an environment. Given the state of the enviornment $$s$$, the agent takes an action $$a$$, receives a reward $$r$$, and the environment transitions to a new state, $$s'$$. The goal of the agent is to maximize reward, which is usually some clear signal from the environment, such as points in a game. 
 
 The rules for how the agent chooses to act in the environment define a *policy*. To learn the most effective policy, the agent cannot simply greedily maximize the reward it will receive after the next action, but must instead consider the total cumulative reward it can expect to receive over a course of actions occurring in the future. Because future rewards are typically uncertain if the environment has random effects, a discount factor of $$\gamma$$ is applied to the reward for each timestep in the future. If $$r_t$$ is the reward received at timestep $$t$$, then $$R_t$$ is the total future discounted *return*:
@@ -148,7 +149,7 @@ This work was done in collaboration with Shane Gu, Richard E. Turner, and [Dougl
 [graves]: https://arxiv.org/pdf/1308.0850.pdf
 [elliot song]: https://cdn2.vox-cdn.com/uploads/chorus_asset/file/6577761/Google_-_Magenta_music_sample.0.mp3
 [elliot post]: https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/
-[model code]: https://github.com/tensorflow/magenta/tree/master/magenta/models/SWEETNAMEHERE
+[model code]: https://github.com/tensorflow/magenta/tree/master/magenta/models/rl-tuner
 [nips rl]: https://sites.google.com/site/deeprlnips2016/
 [doug]: http://research.google.com/pubs/author39086.html
 [kastner]: http://kastnerkyle.github.io/
