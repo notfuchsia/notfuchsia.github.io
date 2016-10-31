@@ -213,14 +213,24 @@ To see if our models actually learned what we were trying to teach them, we comp
 	</tr>
 </table>
 
-These results show that the targeted behaviors have significantly improved in the RL models as compared to the original *Note RNN*. But how do we know that learning these rules didn't cause the models to forget what they learned from data? The figures below plot the rewards received by each model over time, broken down into the $$\log p(a$$&#124;$$s)$$ rewards from the Note RNN (on the left), and the music theory rewards $$r_{MT}$$ (on the right). Each model is compared to a baseline *RL only* model that was trained using only the music theory rewards, and no information about the data probabilities. We see that compared to the *RL only* models, the RL Tuner models maintain much higher data probabilities, while still learning the music theory rewards. 
+<br><br>
+These results show that the targeted behaviors have significantly improved in the RL models as compared to the original *Note RNN*. But how do we know that learning these rules didn't cause the models to forget what they learned from data? The figures below plot the rewards received by each model over time, broken down into the $$\log p(a$$&#124;$$s)$$ rewards from the Note RNN (on the left), and the music theory rewards $$r_{MT}$$ (on the right). Each model is compared to a baseline *RL only* model that was trained using only the music theory rewards, and no information about the data probabilities. We see that compared to the *RL only* models, the RL Tuner models maintain much higher $$\log p(a$$&#124;$$s)$$, while still learning the music theory rewards. 
 
 | ![](/assets/rl_rnn/rewards_note_rnn.png)  | ![](/assets/rl_rnn/rewards_music_theory.png) | 
 |:---:|:---:|
 | Note RNN rewards | Music theory rewards |
 
+Note RNN
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe>
 
+G
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe>
 
+Psi
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe>
+
+Q extra catchy
+<iframe width="560" height="315" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 
 | ![](/assets/rl_rnn/note_rnn.png)  | ![](/assets/rl_rnn/q.png) | ![](/assets/rl_rnn/psi.png) | ![](/assets/rl_rnn/g.png) |
 |:---:|:---:|:---:|:---:|
