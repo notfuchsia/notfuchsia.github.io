@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RL Tuner\: Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
+title: RL Tuner Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
 date:   2016-10-24 08:00:00 -0700
 author: natashajaques
 tags: magenta,melody,rnn,lstm,reinforcement,music
