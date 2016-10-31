@@ -133,7 +133,7 @@ Results
 
 <table>
 	<thead style="border-bottom:1px">
-		<tr>
+		<tr style="border-bottom:1px solid black;">
 			<th> Undesirable behavior   </th>
 			<th> Note RNN </th>			
 			<th> Q   </th>
