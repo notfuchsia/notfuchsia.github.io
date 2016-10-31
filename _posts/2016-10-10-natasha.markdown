@@ -134,7 +134,7 @@ Results
 <table style="width:100%">
 	<thead style="border-bottom:1px">
 		<tr style="border-bottom:1px solid black;">
-			<th> Undesirable behavior   </th>
+			<th> Behavior   </th>
 			<th> Note RNN </th>			
 			<th> Q   </th>
 			<th> $$\Psi$$ </th>
@@ -142,14 +142,21 @@ Results
 		</tr>
 	</thead>
 	<tr>
-		<td style="border-bottom:1px solid black;"> Notes excessively repeated   </td>
-		<td style="border-bottom:1px solid black;"> 63.3% </td>
-		<td style="border-bottom:1px solid black;"> **0.0%** </td>
-		<td style="border-bottom:1px solid black;"> **0.02%** </td>
-		<td style="border-bottom:1px solid black;"> **0.03%** </td>
+		<td> Notes excessively repeated   </td>
+		<td> 63.3% </td>
+		<td> <bold>0.0%</bold> </td>
+		<td> **0.02%** </td>
+		<td> **0.03%** </td>
 	</tr>
 	<tr>
 		<td colspan="5" style="border-bottom:1px solid black;"></td>
+	</tr>
+	<tr>
+		<td> Notes excessively repeated   </td>
+		<td> 63.3% </td>
+		<td> **0.0%** </td>
+		<td> **0.02%** </td>
+		<td> **0.03%** </td>
 	</tr>
 </table>
 
