@@ -107,6 +107,7 @@ $$\begin{align}
 
 Music Theory Rewards
 --------------------
+The rules we implemented to make sure our model conformed to music theory were based on some domain knowledge, and the book ["A Practical Approach to Eighteenth-Century Counterpoint" by Robert Gauldin][gauldin]. We are by no means claiming that these rules are necessary for good compositions, exhaustive, or even particularly creative. They simply allow us to constrain our model to adhere to some sort of consistent structure. We encourage any interested readers to experiment with different rules and see what types of results they can produce. For now, the rules that we chose encourage the compositions produced by our model to have the following characteristics:
 
 * **Stay in key**: Notes should belong to the same key. For example, if the desired key is C-major, a B-flat would not be an acceptable note. 
 
@@ -129,6 +130,17 @@ Music Theory Rewards
 
 Results
 ----------
+
+<table>
+	<tr>
+		<th> Undesirable behavior   </th>
+		<th> Note RNN </th>
+	</tr>
+	<tr>
+		<td> Notes excessively repeated   </td>
+		<td> 63.3% </td>
+	</tr>
+</table>
 
 | Undesirable behavior              | Note RNN | Q         | $$\Psi$$  | G         |
 |-----------------------------------|----------|-----------|-----------|-----------|
@@ -173,6 +185,7 @@ This work was done in collaboration with Shane Gu, Richard E. Turner, and [Dougl
 [psi learning]: http://homepages.inf.ed.ac.uk/svijayak/publications/rawlik-RSS2012.pdf
 [dqn]: https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
 [dqqn]: http://www.aaai.org/Conferences/AAAI/2016/Papers/12vanHasselt12389.pdf
+[gauldin]: http://www.jstor.org/stable/40213921?seq=1#page_scan_tab_contents
 
 <!-- External links -->
 [elliot song]: https://cdn2.vox-cdn.com/uploads/chorus_asset/file/6577761/Google_-_Magenta_music_sample.0.mp3
