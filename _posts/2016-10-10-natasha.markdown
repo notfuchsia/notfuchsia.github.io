@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RL Tuner: Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
+title: RL Tuner\: Generating Music by Tuning Recurrent Neural Networks with Reinforcement Learning
 date:   2016-10-24 08:00:00 -0700
 author: natashajaques
 tags: magenta,melody,rnn,lstm,reinforcement,music
@@ -15,19 +15,22 @@ When I joined [Magenta][magenta] as an intern this summer, the team was hard at 
 
 >The '''Rebellion''' (''Hyerodent'') is \[\[literal\]\], related mildly older than old half sister, the music, and morrow been much more propellent. All those of \[\[Hamas (mass)\|sausage trafficking\]\]s were also known as \[\[Trip class submarine\|"Sante" at Serassim\]\]; "Verra" as 1865-682-831 is related to ballistic missiles. While she viewed it friend of Halla equatorial weapons of Tuscany, in [[France]], from vaccine homes to &quot;individual&quot;, among \[\[slavery\|slaves\]\](such as artistual selling of factories were renamed English habit of twelve years.) 
 
-While the model has learned how to correctly spell English words, some markdown syntax, and even  mostly correct grammatical structure, sentences don't seem to follow a consistent thought. The text wonders rapidly from topic to topic, discussing everything from sisters to submarines to Tuscany, slavery, and factories, all in one short paragraph. This type of global incoherence is typical of the melodies produced by a vanilla *Note RNN* as well. They do not maintain a consistent musical structure, and can sound wandering and random. 
+While the model has learned how to correctly spell English words, some markdown syntax, and even mostly correct grammatical structure, sentences don't seem to follow a consistent thought. The text wonders rapidly from topic to topic, discussing everything from sisters to submarines to Tuscany, slavery, and factories, all in one short paragraph. This type of global incoherence is typical of the melodies produced by a vanilla *Note RNN* as well. They do not maintain a consistent musical structure, and can sound wandering and random. 
 
 Music is an interesting test-bed for sequence generation, in that musical compositions adhere to a relatively well-defined set of structural rules. Any beginning music student learns that groups of notes belong to keys, chords follow progressions, and songs have consistent structures made up of musical phrases. So what if we could teach a *Note RNN* these kinds of musical rules, while still allowing it to learn patterns from music it hears in the world? 
 
-This is the idea behind the **RL Tuner** model I will describe in this post. We take a trained *Note RNN* and teach it concepts of music theory using Reinforcement Learning (RL). RL can allow a network to learn some non-differentiable *reward* function. In this case, we define a set of music theory rules and produce rewards based on whether the model's compositions adhere to those rules. However, to ensure that the model can remember the note probabilities it originally learned from data, we keep a second, fixed copy of the *Note RNN* which we call the *Reward RNN*. The *Reward RNN* is used to compute $$p(a|s)$$, the probability of playing the next note as learned by the original *Note RNN*. We augment our music theory rewards with $$p(a|s)$$, so that the total reward reflects both our music theory constraints and information learned from data.
+This is the idea behind the **RL Tuner** model I will describe in this post. We take a trained *Note RNN* and teach it concepts of music theory using Reinforcement Learning (RL). RL can allow a network to learn some non-differentiable *reward* function. In this case, we define a set of music theory rules, and produce rewards based on whether the model's compositions adhere to those rules. However, to ensure that the model can remember the note probabilities it originally learned from data, we keep a second, fixed copy of the *Note RNN* which we call the *Reward RNN*. The *Reward RNN* is used to compute $$p(a|s)$$, the probability of playing the next note as learned by the original *Note RNN*. We augment our music theory rewards with $$p(a|s)$$, so that the total reward reflects both our music theory constraints and information learned from data.
 
+We show that this approach allows the model to maintain high $$\log p(a|s)$$ values, while significantly improving the behaviors of the *Note RNN* targeted by the music theory rewards. For example, before training with RL, 63.3% of notes produced by the *Note RNN* belonged to some excessively repeated segment of notes; after RL, 0.0-0.03% of notes were excessively repeated. Since excessively repeating tokens is a problem in other domains as well (e.g. text generation), we believe our approach could have broader applications. But does it actually work to produce better music? We conducted a user study and found that people find the compositions produced by our three RL models significantly more musically pleasing than those of the original *Note RNN*. But we encourage you to judge for yourself; samples from each of the models will be provided later in this post.
 
+The models, derivations, and results are all described in our recent [research paper][our arxiv], written by myself, Shane Gu, Richard E. Turner, and Douglas Eck<sup>[1](#footnote-nipsrl)</sup>. [Code][code] to run this model is also available on the Magenta github repo; please try it out! The music theory rules implemented for the model are only a first attempt, and could easily be improved by someone with musical training!
 
-This post will give an introduction to the **RL Tuner** model. [Code](our code) to run this model has recently been posted to the Magenta github; the code will be explained in detail at the end of this post in case you would like to try it for yourself! Finally, there is also a recent [arxiv paper](our arxiv) describing this work in detail, written by myself, Shane Gu, Richard E. Turner, and Douglas Eck. A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop](nips rl). 
+<a name="footnote-nipsrl"><sub><sup>1</sup></sub></a> <sub><sup>A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop][nips rl].</sup></sub> 
 
 Introduction to Reinforcement Learning and Deep Q-Learning
 ----------------------------------------------------------
-Reinforcement learning can be used to 
+This section will give a brief introduction to some ideas behind RL and Deep Q Networks (DQNs). Those of you familiar with these topics may wish to skip ahead. 
+
 non differentiable
 points in a game 
 
@@ -144,18 +147,26 @@ Acknowledgements
 ----------------
 This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular [Kyle Kastner][kastner] for his knowledgeable insights and handy spectrogram-movie-producing code. 
 
+<!-- Our stuff (may need to change) -->
 [our arxiv]: https://arxiv.org/abs/comingsoon
+[code]: https://github.com/tensorflow/magenta/tree/master/magenta/models/rl-tuner
 
+<!-- Research papers -->
 [graves]: https://arxiv.org/pdf/1308.0850.pdf
+[g learning]: https://arxiv.org/pdf/1512.08562.pdf
+[psi learning]: http://homepages.inf.ed.ac.uk/svijayak/publications/rawlik-RSS2012.pdf
+[dqn]: https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
+
+<!-- External links -->
 [elliot song]: https://cdn2.vox-cdn.com/uploads/chorus_asset/file/6577761/Google_-_Magenta_music_sample.0.mp3
 [elliot post]: https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/
-[model code]: https://github.com/tensorflow/magenta/tree/master/magenta/models/rl-tuner
 [nips rl]: https://sites.google.com/site/deeprlnips2016/
 [doug]: http://research.google.com/pubs/author39086.html
 [kastner]: http://kastnerkyle.github.io/
 [brain]: http://research.google.com/teams/brain/
 [tensorflow]: https://www.tensorflow.org/
 [magenta]: https://magenta.tensorflow.org/
+
 
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
