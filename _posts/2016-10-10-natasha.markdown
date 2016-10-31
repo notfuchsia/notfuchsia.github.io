@@ -133,7 +133,7 @@ Results
 
 <table style="width:100%">
 	<thead style="border-bottom:1px">
-		<tr style="border-bottom:1px solid black;">
+		<tr>
 			<th> Behavior   </th>
 			<th> Note RNN </th>			
 			<th> Q   </th>
@@ -141,6 +141,23 @@ Results
 			<th> G </th>
 		</tr>
 	</thead>
+	<tr>
+		<td colspan="5" style="border-bottom:1px solid black;"></td>
+	</tr>
+	<tr>
+		<td> Notes excessively repeated   </td>
+		<td> 63.3% </td>
+		<td> <strong>0.0%</strong> </td>
+		<td> **0.02%** </td>
+		<td> **0.03%** </td>
+	</tr>
+	<tr>
+		<td> Notes excessively repeated   </td>
+		<td> 63.3% </td>
+		<td> <bold>0.0%</bold> </td>
+		<td> **0.02%** </td>
+		<td> **0.03%** </td>
+	</tr>
 	<tr>
 		<td> Notes excessively repeated   </td>
 		<td> 63.3% </td>
