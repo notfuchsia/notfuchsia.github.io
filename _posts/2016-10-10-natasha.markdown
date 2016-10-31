@@ -95,15 +95,15 @@ L_v(\theta) &= \mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||
 
 This is not exactly the same as our method, because we are missing the entropy term in the KL-divergence function. This led us to implement two other KL-regularized variants of Q-learning: [$$\Psi$$ learning][psi learning], and [G learning][g learning]. The loss function for $$\Psi$$ learning is:
 
-\begin{align} 
+$$\begin{align} 
 &L(\theta)= \mathbb{E}[(\log p(a|s) + \frac{1}{c}r_{MT}(s,a) + \gamma \log \sum_{a'} e^{\Psi(s',a';\theta^-)} - \Psi(s,a;\theta))^2]
-\end{align}
+\end{align}$$
 
 And the loss function for G learning is:
 
-\begin{align} 
+$$\begin{align} 
 &L(\theta)= \mathbb{E}_\beta[(\frac{1}{c}r_{MT}(s,a)+ \gamma \log \sum_{a'} e^{\log p(a'|s')+G(s',a';\theta^-)} - G(s,a;\theta))^2]
-\end{align}
+\end{align}$$
 
 Music Theory Rewards
 --------------------
