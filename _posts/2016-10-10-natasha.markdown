@@ -131,11 +131,13 @@ The rules we implemented to make sure our model conformed to music theory were b
 Results
 ----------
 
-<table>
-	<tr>
-		<th> Undesirable behavior   </th>
-		<th> Note RNN </th>
-	</tr>
+<table border="1">
+	<thead style="border-bottom:1px">
+		<tr>
+			<th> Undesirable behavior   </th>
+			<th> Note RNN </th>
+		</tr>
+	</thead>
 	<tr>
 		<td> Notes excessively repeated   </td>
 		<td> 63.3% </td>
