@@ -134,11 +134,11 @@ Results
 <table style="width:100%">
 	<thead style="border-bottom:1px">
 		<tr>
-			<th> Behavior   </th>
-			<th> Note RNN </th>			
-			<th> Q   </th>
-			<th> $$\Psi$$ </th>
-			<th> G </th>
+			<th style:"text-align:left"> Behavior   </th>
+			<th style:"text-align:left"> Note RNN </th>
+			<th style:"text-align:left"> Q   </th>
+			<th style:"text-align:left"> $$\Psi$$ </th>
+			<th style:"text-align:left"> G </th>
 		</tr>
 	</thead>
 	<tr>
@@ -152,11 +152,11 @@ Results
 		<td> **0.03%** </td>
 	</tr>
 	<tr>
-		<td> Notes excessively repeated   </td>
-		<td> 63.3% </td>
-		<td> <bold>0.0%</bold> </td>
-		<td> **0.02%** </td>
-		<td> **0.03%** </td>
+		<td> Notes not in key   </td>
+		<td> 0.1% </td>
+		<td> 1.0% </td>
+		<td> 0.6% </td>
+		<td> 28.7% </td>
 	</tr>
 	<tr>
 		<td> Notes excessively repeated   </td>
