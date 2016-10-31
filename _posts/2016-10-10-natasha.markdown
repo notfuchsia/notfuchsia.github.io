@@ -131,16 +131,22 @@ The rules we implemented to make sure our model conformed to music theory were b
 Results
 ----------
 
-<table border="1">
+<table>
 	<thead style="border-bottom:1px">
 		<tr>
 			<th> Undesirable behavior   </th>
-			<th> Note RNN </th>
+			<th> Note RNN </th>			
+			<th> Q   </th>
+			<th> $$\Psi$$ </th>
+			<th> G </th>
 		</tr>
 	</thead>
 	<tr>
 		<td> Notes excessively repeated   </td>
 		<td> 63.3% </td>
+		<td> **0.0%** </td>
+		<td> **0.02%** </td>
+		<td> **0.03%** </td>
 	</tr>
 </table>
 
