@@ -89,9 +89,9 @@ This modified loss function forces the model to learn that the most valuable act
 
 In [our paper][our arxiv] we show that the loss function described above can be related to Stochastic Optimal Control, which defines an RL problem in which KL-divergence from a prior policy is penalized. If we think of the probabilities learned by the *Note RNN* as the prior policy, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
 
-\begin{align} 
+$$\begin{align} 
 L_v(\theta) &= \mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||p(\cdot|s_t)]]
-\end{align}
+\end{align}$$
 
 This is not exactly the same as our method, because we are missing the entropy term in the KL-divergence function. This led us to implement two other KL-regularized variants of Q-learning: [$$\Psi$$ learning][psi learning], and [G learning][g learning]. The loss function for $$\Psi$$ learning is:
 
