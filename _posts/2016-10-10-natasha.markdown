@@ -134,11 +134,11 @@ Results
 <table style="width:100%">
 	<thead style="border-bottom:1px">
 		<tr>
-			<th style:"text-align:left"> Behavior   </th>
-			<th style:"text-align:left"> Note RNN </th>
-			<th style:"text-align:left"> Q   </th>
-			<th style:"text-align:left"> $$\Psi$$ </th>
-			<th style:"text-align:left"> G </th>
+			<th style="text-align:left"> Behavior   </th>
+			<th style="text-align:left"> Note RNN </th>
+			<th style="text-align:left"> Q   </th>
+			<th style="text-align:left"> $$\Psi$$ </th>
+			<th style="text-align:left"> G </th>
 		</tr>
 	</thead>
 	<tr>
