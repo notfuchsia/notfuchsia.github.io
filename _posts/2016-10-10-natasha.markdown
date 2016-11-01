@@ -69,7 +69,7 @@ As described above, the main idea behind the RL Tuner model is to take an RNN tr
 
 ![Model diagram](/assets/rl_tuner/rl_rnn_diagram.png "Model diagram")
 
-To formulate musical composition as an RL problem, we treat choosing the next note as taking an action $$a$$. The state of the environment $$s$$ consists of the state of the composition so far, as well as the internal LSTM state of the *Q-network* and *Reward RNN*. The reward function is a combination of both music theory rules and probabilities learned from data. The music theory reward $$r_{MT}(a,s)$$ is calculated by a set of functions described in the next section, that constrain the model to adhere to certain rules, such as playing in the same key. However, it is necessary that the model still be ``creative,'' rather than learning a simple composition that can easily exploit these rewards. Therefore, the *Reward RNN* is used to compute $$p(a$$&#124;$$s)$$, the probability of playing the next note $$a$$ given the composition $$s$$ as originally learned from data. The total reward given at time $$t$$ is therefore: 
+To formulate musical composition as an RL problem, we treat choosing the next note as taking an action $$a$$. The state of the environment $$s$$ consists of the state of the composition so far, as well as the internal LSTM state of the *Q-network* and *Reward RNN*. The reward function is a combination of both music theory rules and probabilities learned from data. The music theory reward $$r_{MT}(a,s)$$ is calculated by a set of functions (described in the next section) that constrain the model to adhere to certain rules, such as playing in the same key. However, it is necessary that the model still be "creative" rather than learning a simple composition that can easily exploit these rewards. Therefore, the *Reward RNN* is used to compute $$p(a$$&#124;$$s)$$, the probability of playing the next note $$a$$ given the composition $$s$$ as originally learned from data. The total reward given at time $$t$$ is therefore: 
 
 $$\begin{align} 
 \label{eq:reward}
@@ -87,22 +87,22 @@ This modified loss function forces the model to learn that the most valuable act
 
 ### For the mathematically inclined...
 
-In [our paper][our arxiv] we show that the loss function described above can be related to Stochastic Optimal Control, which defines an RL problem in which KL-divergence from a prior policy is penalized. If we think of the probabilities learned by the *Note RNN* as the prior policy, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
+In [our paper][our arxiv] we show that the loss function described above can be related to Stochastic Optimal Control, which defines an RL problem in which KL-divergence from a prior policy is penalized. If we think of the probabilities learned by the *Note RNN* as the prior policy $$p(\cdot$$&#124;$$s)$$, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
 
 $$\begin{align} 
-L_v(\theta) &= \mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||p(\cdot|s_t)]]
+\mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||p(\cdot|s_t)]]
 \end{align}$$
 
 This is not exactly the same as our method, because we are missing the entropy term in the KL-divergence function. This led us to implement two other KL-regularized variants of Q-learning: [$$\Psi$$ learning][psi learning], and [G learning][g learning]. The loss function for $$\Psi$$ learning is:
 
 $$\begin{align} 
-&L(\theta)= \mathbb{E}[(\log p(a|s) + \frac{1}{c}r_{MT}(s,a) + \gamma \log \sum_{a'} e^{\Psi(s',a';\theta^-)} - \Psi(s,a;\theta))^2]
+&L_{\Psi}(\theta)= \mathbb{E}[(\log p(a|s) + \frac{1}{c}r_{MT}(s,a) + \gamma \log \sum_{a'} e^{\Psi(s',a';\theta^-)} - \Psi(s,a;\theta))^2]
 \end{align}$$
 
 And the loss function for G learning is:
 
 $$\begin{align} 
-&L(\theta)= \mathbb{E}_\beta[(\frac{1}{c}r_{MT}(s,a)+ \gamma \log \sum_{a'} e^{\log p(a'|s')+G(s',a';\theta^-)} - G(s,a;\theta))^2]
+&L_G(\theta)= \mathbb{E}_\beta[(\frac{1}{c}r_{MT}(s,a)+ \gamma \log \sum_{a'} e^{\log p(a'|s')+G(s',a';\theta^-)} - G(s,a;\theta))^2]
 \end{align}$$
 
 Music Theory Rewards
@@ -220,6 +220,7 @@ These results show that the targeted behaviors have significantly improved in th
 |:---:|:---:|
 | Note RNN rewards | Music theory rewards |
 
+<br>
 Even so, it's not clear that learning this somewhat arbitrary set of music theory rules will lead to better sounding compositions. To find out whether the models have improved over the original *Note RNN*, we asked Mechanical Turk workers to rate which of two randomly selected compositions they preferred. The figure below shows the number of times a composition from each model was selected as the winner. All three RL Tuner models significantly outperformed the *Note RNN*. In addition, both the $$\Psi$$ and $$Q$$ models were significantly better than the $$G$$ model.  
 
 <div style="text-align:center"><img src="/assets/rl_tuner/user_study.png" width="400"></div>
