@@ -232,6 +232,8 @@ But you don't need to take our word for it! The compositions used in the study a
 	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 </div>
 
+The figure below plots how the probability that the models place on each note changes during the composition. 
+
 | ![](/assets/rl_tuner/note_rnn.png)  | ![](/assets/rl_tuner/q.png) | ![](/assets/rl_tuner/psi.png) | ![](/assets/rl_tuner/g.png) |
 |:---:|:---:|:---:|:---:|
 | Note RNN | Q | $$\Psi$$ | G |
