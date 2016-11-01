@@ -228,7 +228,7 @@ Even so, it's not clear that learning this somewhat arbitrary set of music theor
 |:---:|:---:|
 | Note RNN | G |
 
-<iframe style="display: inline-block;" width="420" height="236" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="420" height="236" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
+<iframe style="display: inline-block;" width="280" height="158" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="158" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 
 | ![](/assets/rl_tuner/note_rnn.png)  | ![](/assets/rl_tuner/q.png) | ![](/assets/rl_tuner/psi.png) | ![](/assets/rl_tuner/g.png) |
 |:---:|:---:|:---:|:---:|
