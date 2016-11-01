@@ -240,6 +240,7 @@ The figure below plots how the probability that the models place on each note ch
 | ![](/assets/rl_tuner/note_rnn.png)  | ![](/assets/rl_tuner/q.png) | ![](/assets/rl_tuner/psi.png) | ![](/assets/rl_tuner/g.png) |
 |:---:|:---:|:---:|:---:|
 | Note RNN | Q | $$\Psi$$ | G |
+
 <br>
 
 Summary
