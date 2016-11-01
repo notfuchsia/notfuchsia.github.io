@@ -225,7 +225,7 @@ Even so, it's not clear that learning this somewhat arbitrary set of music theor
 
 <div style="text-align:center"><img src="/assets/rl_tuner/user_study.png" width="400"></div>
 
-<br><br>
+<br>
 But you don't need to take our word for it! The compositions used in the study are all available [here][samples] - please check them out! Below you can listen to a composition from each model. In the top row are compositions from the *Note RNN* and $$G$$; in the bottom row are $$\Psi$$ and $$Q$$.
 
 <div style="text-align:center">
