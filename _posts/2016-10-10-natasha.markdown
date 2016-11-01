@@ -225,8 +225,8 @@ Even so, it's not clear that learning this somewhat arbitrary set of music theor
 <div style="text-align:center"><img src="/assets/rl_tuner/user_study.png" width="400"></div>
 
 <div style="text-align:center">
-	<iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe>
-	<iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
+	<iframe style="display: inline-block;margin-right:20px" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe>
+	<iframe style="display: inline-block;margin-right:20px" width="280" height="280" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 </div>
 
 | ![](/assets/rl_tuner/note_rnn.png)  | ![](/assets/rl_tuner/q.png) | ![](/assets/rl_tuner/psi.png) | ![](/assets/rl_tuner/g.png) |
