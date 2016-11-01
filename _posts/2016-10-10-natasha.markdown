@@ -240,10 +240,11 @@ The figure below plots how the probability that the models place on each note ch
 | ![](/assets/rl_tuner/note_rnn.png)  | ![](/assets/rl_tuner/q.png) | ![](/assets/rl_tuner/psi.png) | ![](/assets/rl_tuner/g.png) |
 |:---:|:---:|:---:|:---:|
 | Note RNN | Q | $$\Psi$$ | G |
+<br>
 
 Summary
 -------
-So, we've demonstrated a technique for using RL to refine or *tune* (\*pun intended\*) an RNN trained on data. Although some researchers may prefer to train models end-to-end on data, this approach is limited by the quality of the data that can be collected. When the data contains hidden biases, this approach can be problematic, to say the least.
+In conclusion, we've demonstrated a technique for using RL to refine or *tune* (\*pun intended\*) an RNN trained on data. Although some researchers may prefer to train models end-to-end on data, this approach is limited by the quality of the data that can be collected. When the data contains hidden biases, this approach can really be problematic.
 
 We hope you've enjoyed this post. If you're interested in trying out the RL Tuner model for yourself, please check out the [README][code] file on the Magenta github.
 
