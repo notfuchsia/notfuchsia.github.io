@@ -245,14 +245,14 @@ The figure below plots how the probability that the models place on each note ch
 
 Summary
 -------
-In conclusion, we've demonstrated a technique for using RL to refine or *tune* (\*pun intended\* U+1F604) an RNN trained on data. Although some researchers may prefer to train models end-to-end on data, this approach is limited by the quality of the data that can be collected. When the data contains hidden biases, this approach can really be problematic.
+In conclusion, we've demonstrated a technique for using RL to refine or *tune* (\*pun intended\*) an RNN trained on data. Although some researchers may prefer to train models end-to-end on data, this approach is limited by the quality of the data that can be collected. When the data contains hidden biases, this approach can really be problematic.
 
 We hope you've enjoyed this post. If you're interested in trying out the RL Tuner model for yourself, please check out the [README][code] file on the Magenta github.
 
 
 Acknowledgements
 ----------------
-This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular [Kyle Kastner][kastner] for his knowledgeable insights and handy spectrogram-movie-producing code. 
+This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular Curtis (Fjord) Hawthorne and [Kyle Kastner][kastner] (for his knowledgeable insights and handy spectrogram-movie-producing code). 
 
 <!-- Our stuff (may need to change) -->
 [our arxiv]: https://arxiv.org/abs/comingsoon
