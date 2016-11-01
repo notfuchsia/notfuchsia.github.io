@@ -214,7 +214,7 @@ To see if our models actually learned what we were trying to teach them, we comp
 </table>
 
 <br><br>
-These results show that the targeted behaviors have significantly improved in the RL models as compared to the original *Note RNN*. But how do we know that learning these rules didn't cause the models to forget what they learned from data? The figures below plot the rewards received by each model over time, broken down into the $$\log p(a$$&#124;$$s)$$ rewards from the Note RNN (on the left), and the music theory rewards $$r_{MT}$$ (on the right). Each model is compared to a baseline *RL only* model that was trained using only the music theory rewards, and no information about the data probabilities. We see that compared to the *RL only* models, the RL Tuner models maintain much higher $$\log p(a$$&#124;$$s)$$, while still learning the music theory rewards. 
+These results show that the targeted behaviors have significantly improved in the RL models as compared to the original *Note RNN*. But how do we know that learning these rules didn't cause the models to forget what they learned from data? The figures below plot the rewards received by each model over time, broken down into the $$\log p(a$$&#124;$$s)$$ rewards from the Note RNN (on the left), and the music theory rewards $$r_{MT}$$ (on the right). Each model is compared to a baseline *RL only* model that was trained using only the music theory rewards, and no information about the data probabilities. We see that compared to the *RL only* model, the RL Tuner models maintain much higher $$\log p(a$$&#124;$$s)$$, while still learning the music theory rewards. 
 
 | ![](/assets/rl_tuner/rewards_note_rnn.png)  | ![](/assets/rl_tuner/rewards_music_theory.png) | 
 |:---:|:---:|
