@@ -44,7 +44,7 @@ $$\begin{align}
 Q^*(s, a) = max_\pi \mathbb{E}[R_t|s_t = s, a_t = a, \pi]
 \end{align}$$
 
-where $$\pi$$ is a policy mapping states to distributions over actions. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
+where $$\pi$$ is the policy mapping each state to a probability distributions over the next action. To learn $$Q*$$, we can apply an iterative update based on the Bellman equation:
 \begin{align}
 Q_{i+1}(s, a) = \mathbb{E}[r + \gamma max_{a'}Q_i(s',a')|s,a]
 \end{align}
@@ -55,7 +55,7 @@ In [Deep Q Learning][dqn], a neural network called the Deep Q-network (DQN) is u
 \label{eq:qloss}
 L_t(\theta_t) = (r_t + \gamma \max_{a'}Q(s',a';\theta_{t-1}) - Q(s,a;\theta_t))^2
 \end{align}
-The loss function describes the difference between the actual reward received at step $$t$$, $$r_t$$, plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$, and the expected future discounted return output by the *Q-network* at step $$t$$. Essentially, this is the prediction error in estimating the $$Q$$ function made by the *Q-network*. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
+The first two terms are the $$Q$$ function the network is trying to learn: the actual reward received at step $$t$$, $$r_t$$, plus the discounted future return estimated by the *Q-network* parameters at step $$t-1$$. The loss function computes the difference between this desired $$Q$$ value, and the actual value output by the *Q-network* at step $$t$$. Essentially, this is the prediction error in estimating the $$Q$$ function made by the *Q-network*. Importantly, the parameters for the previous generation of the network ($$\theta_{t-1}$$) are held fixed, and not updated by SGD.
 
 <!--While interacting with the environment, the $$Q$$-learning agent typically follows an $$\epsilon$$-greedy policy. This means that it will greedily choose the action with the highest Q value with probability $$1-\epsilon$$, and choose a random action with probability $$\epsilon$$. This off-policy learning method ensures a reasonably trade-off between exploration of the action space, and exploitation of the most efficient strategies learned so far. -->
 
