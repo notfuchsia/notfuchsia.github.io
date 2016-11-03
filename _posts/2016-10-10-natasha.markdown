@@ -69,7 +69,7 @@ As described above, the main idea behind the RL Tuner model is to take an RNN tr
 
 ![Model diagram](/assets/rl_tuner/rl_rnn_diagram.png "Model diagram")
 
-To formulate musical composition as an RL problem, we treat choosing the next note as taking an action $$a$$. The state of the environment $$s$$ consists of the state of the composition so far, as well as the internal LSTM state of the *Q-network* and *Reward RNN*. The reward function is a combination of both music theory rules and probabilities learned from data. The music theory reward $$r_{MT}(a,s)$$ is calculated by a set of functions (described in the next section) that constrain the model to adhere to certain rules, such as playing in the same key. However, it is necessary that the model still be "creative" rather than learning a simple composition that can easily exploit these rewards. Therefore, the *Reward RNN* is used to compute $$p(a$$&#124;$$s)$$, the probability of playing the next note $$a$$ given the composition $$s$$ as originally learned from data. The total reward given at time $$t$$ is therefore: 
+To formulate musical composition as an RL problem, we treat choosing the next note as taking an action $$a$$. The state of the environment $$s$$ consists of the state of the composition so far, as well as the internal LSTM state of the *Q-network* and *Reward RNN*. The reward function is a combination of both music theory rules and probabilities learned from data. The music theory reward $$r_{MT}(a,s)$$ is calculated by a set of functions (described in the next section) that constrain the model to adhere to certain rules, such as playing in the same key. However, it is necessary that the model still be "creative" rather than learning a simple composition that can easily exploit these rewards. Therefore, the *Reward RNN* is used to compute $$p(a$$&#124;$$s)$$, the probability of playing the next note $$a$$ given the composition $$s$$ as originally learned from actual songs. The total reward given at time $$t$$ is therefore: 
 
 $$\begin{align} 
 \label{eq:reward}
@@ -87,7 +87,7 @@ This modified loss function forces the model to learn that the most valuable act
 
 ### For the mathematically inclined...
 
-In [our paper][our arxiv] we show that the loss function described above can be related to Stochastic Optimal Control, which defines an RL problem in which KL-divergence from a prior policy is penalized. If we think of the probabilities learned by the *Note RNN* as the prior policy $$p(\cdot$$&#124;$$s)$$, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
+In [our paper][our arxiv] we show that the loss function described above can be related to an approximation of the Stochastic Optimal Control objective, leading to a RL cost with an additional penalty applied to KL-divergence from a prior policy. If we think of the probabilities learned by the *Note RNN* as the prior policy $$p(\cdot$$&#124;$$s)$$, and $$\pi_{\theta}$$ as the policy learned by the model, then this would be equivalent to learning the following function: 
 
 $$\begin{align} 
 \mathbb{E}_{\pi}[\sum_t r(s_t,a_t)/c - KL[\pi_\theta(\cdot|s_t)||p(\cdot|s_t)]]
