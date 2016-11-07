@@ -289,6 +289,12 @@ This work was done in collaboration with [Shane Gu][shane], [Richard E. Turner][
 [tensorflow]: https://www.tensorflow.org/
 [magenta]: https://magenta.tensorflow.org/
 
-
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  CommonHTML: { linebreaks: { automatic: true } },
+  "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } }
+});
+</script>
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
