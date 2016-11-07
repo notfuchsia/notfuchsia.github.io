@@ -12,9 +12,9 @@ We are excited to announce our new [RL Tuner algorithm][our arxiv], a method for
 <div style="text-align:center">
 	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 </div>
+<br>
 
 ## Introduction
-
 
 <img style="margin-right:10px" align="left" src="/assets/rl_tuner/note_rnn_model.png" width="200">
 
@@ -32,7 +32,7 @@ This is the idea behind the **RL Tuner** model I will describe in this post. We 
 
 We show that this approach allows the model to maintain information about the note probabilities learned from data, while significantly improving the behaviors of the *Note RNN* targeted by the music theory rewards. For example, before training with RL, 63.3% of notes produced by the *Note RNN* belonged to some excessively repeated segment of notes; after RL, 0.0-0.03% of notes were excessively repeated. Since excessively repeating tokens is a problem in other domains as well (e.g. text generation), we believe our approach could have broader applications. But does it actually work to produce better music? We conducted a user study and found that people find the compositions produced by our three RL models significantly more musically pleasing than those of the original *Note RNN*. But we encourage you to judge for yourself; samples from each of the models will be provided later in this post.
 
-The models, derivations, and results are all described in our recent [research paper][our arxiv], written by myself, Shane Gu, Richard E. Turner, and Douglas Eck<sup>[1](#footnote-nipsrl)</sup>. [Code][code] to run this model is also available on the Magenta github repo; please try it out! The music theory rules implemented for the model are only a first attempt, and could easily be improved by someone with musical training.
+The models, derivations, and results are all described in our recent [research paper][our arxiv], written by myself, [Shane Gu][shane], [Richard E. Turner][rich], and Douglas Eck<sup>[1](#footnote-nipsrl)</sup>. [Code][code] to run this model is also available on the Magenta github repo; please try it out! The music theory rules implemented for the model are only a first attempt, and could easily be improved by someone with musical training.
 
 <a name="footnote-nipsrl"><sub><sup>1</sup></sub></a> <sub><sup>A version of this work was accepted at the [NIPS 2016 Deep Reinforcement Learning Workshop][nips rl].</sup></sub> 
 
@@ -261,7 +261,7 @@ We hope you've enjoyed this post. If you're interested in trying out the RL Tune
 
 Acknowledgements
 ----------------
-This work was done in collaboration with Shane Gu, Richard E. Turner, and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular Curtis (Fjord) Hawthorne and [Kyle Kastner][kastner] (for his knowledgeable insights and handy spectrogram-movie-producing code). 
+This work was done in collaboration with [Shane Gu][shane], [Richard E. Turner][rich], and [Douglas Eck][doug]. Many thanks also go to my wonderful collaborators on the [Magenta][magenta] team in [Google Brain][brain], and in particular Curtis (Fjord) Hawthorne and [Kyle Kastner][kastner] (for his knowledgeable insights and handy spectrogram-movie-producing code). 
 
 <!-- Our stuff (may need to change) -->
 [our arxiv]: https://arxiv.org/abs/comingsoon
@@ -282,6 +282,8 @@ This work was done in collaboration with Shane Gu, Richard E. Turner, and [Dougl
 [elliot post]: https://magenta.tensorflow.org/2016/07/15/lookback-rnn-attention-rnn/
 [nips rl]: https://sites.google.com/site/deeprlnips2016/
 [doug]: http://research.google.com/pubs/author39086.html
+[shane]: http://sg717.user.srcf.net/
+[rich]: http://learning.eng.cam.ac.uk/Public/Turner/WebHome
 [kastner]: http://kastnerkyle.github.io/
 [brain]: http://research.google.com/teams/brain/
 [tensorflow]: https://www.tensorflow.org/
