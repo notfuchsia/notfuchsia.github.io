@@ -237,7 +237,7 @@ Even so, it's not clear that learning this somewhat arbitrary set of music theor
 But you don't need to take our word for it! The compositions used in the study are all available [here][samples] - please check them out! Below, you can listen to a composition from each model. In the top row are compositions from the *Note RNN* and $$G$$; in the bottom row are $$\Psi$$ and $$Q$$.
 
 <div style="text-align:center">
-	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe>
+	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/c5wm9NR1QiU" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/HjCxS53Ta14" frameborder="0" allowfullscreen></iframe>
 	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/PavKsrzFAEI" frameborder="0" allowfullscreen><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/rJ0KQjku7T4" frameborder="0" allowfullscreen></iframe>
 </div>
 
