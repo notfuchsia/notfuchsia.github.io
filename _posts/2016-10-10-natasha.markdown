@@ -7,7 +7,7 @@ tags: magenta,melody,rnn,lstm,reinforcement,music
 excerpt_separator: <!--more-->
 ---
 
-We are excited to announce our new [RL Tuner algorithm][our arxiv], a method for enchancing the performance of an LSTM trained on data using Reinforcement Learning (RL)! We create an RL reward function that teaches the model to follow certain rules, while still allowing it to retain information learned from data. We use *RL Tuner* on an LSTM trained to generate melodies to teach it concepts of music theory. The two videos below show samples from the original LSTM model, and the same model enchanced using *RL Tuner*. 
+We are excited to announce our new [RL Tuner algorithm][our arxiv], a method for enchancing the performance of an LSTM trained on data using Reinforcement Learning (RL)! We create an RL reward function that teaches the model to follow certain rules, while still allowing it to retain information learned from data. We use *RL Tuner* to teach concepts of music theory to an LSTM trained to generate melodies. The two videos below show samples from the original LSTM model, and the same model enchanced using *RL Tuner*. 
 
 <div style="text-align:center">
 	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
