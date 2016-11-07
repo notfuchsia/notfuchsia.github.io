@@ -8,6 +8,7 @@ excerpt_separator: <!--more-->
 ---
 
 
+I AM ADDING TEXT
 <div style="text-align:center">
 	<iframe style="display: inline-block;margin-right:5px" width="280" height="280" src="https://www.youtube.com/embed/cDcsOokicLw" frameborder="0" allowfullscreen></iframe><iframe style="display: inline-block;" width="280" height="280" src="https://www.youtube.com/embed/abBfZB5DlSY" frameborder="0" allowfullscreen></iframe>
 </div>
