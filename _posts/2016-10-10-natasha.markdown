@@ -2,7 +2,7 @@
 layout: post
 title: Tuning Recurrent Neural Networks with Reinforcement Learning
 date:   2016-10-24 08:00:00 -0700
-author: natashajaques
+author: natashamjaques
 tags: magenta,melody,rnn,lstm,reinforcement,music
 excerpt_separator: <!--more-->
 ---
