@@ -1,31 +1,24 @@
 ---
-layout: default
+layout: home
 ---
 
 
+<div class="about">
+	<h2> About Magenta</h2>
+	<p> Magenta is a Google Brain project to ask and answer the questions, “Can we use machine learning to create compelling art and music? If so, how? If not, why not?” Our work will be done in TensorFlow, and we’ll release our models and tools in open source. These will be accompanied by demos, tutorial blog postings and technical papers. To follow our progress, watch our GitHub and or join our discussion group.</p>
+
+<p>Magenta encompasses two goals. It’s first a research project to advance the state-of-the art in music, video, image and text generation. So much has been done with machine learning to understand content— for example speech recognition and translation; in this project we want to explore content generation and creativity. Second, Magenta is an attempt to build a community of artists, coders and machine learning researchers. To facilitate that, the core Magenta team will build open-source infrastructure around TensorFlow for making art and music. This will start with audio and video support in TensorFlow, tools for working with data formats like MIDI, and platforms that help artists connect to machine learning models. For example, one of our goals is to make it super simple to play music along with a Magenta performance model.</p>
+</div>
+
+
 <div class="home">
+	<h2> Recent Updates</h2>
   <ul class="post-list">
     {% for post in site.posts %}
-      {% assign author = site.authors[post.author] %}
       <li>
-        <h2>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-       {% if author %} •
-         {% if author.web %}
-           <a href={{ author.web }}>{{ author.name }}</a>
-         {% else %}
-           {{ author.name }}
-         {% endif %}
-         {% if author.github %}
-           ({% include icon-github.html username=author.github %})
-         {% endif %}
-        {% endif %}
-        {{ post.excerpt }}
-        Read <a class="post-full-link" href="{{ post.url | prepend: site.baseurl }}">full post</a>.
       </li>
     {% endfor %}
   </ul>
-
 </div>
