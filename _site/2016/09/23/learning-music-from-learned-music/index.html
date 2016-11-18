@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Human Learning What WaveNet Learned from Humans</title>
+  <meta name="description" content="(or Learning Music Learned From Music)A few days ago, DeepMind posted audio synthesis results that included .wav filesgenerated from a training data set of h...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://magenta.tensorflow.org/2016/09/23/learning-music-from-learned-music/">
+  <link rel="alternate" type="application/rss+xml" title="Magenta" href="https://magenta.tensorflow.org/feed.xml">
+  <script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+  <script>
+  new gweb.analytics.AutoTrack({
+    profile: 'UA-80107903-1'
+  });
+  </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+    <a class="site-title" href="/"><span class="site-title"><img src="/assets/magenta-logo.png" height=75></span>
+</a -->
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        <a class="page-link" href="https://www.github.com/tensorflow/magenta">GitHub</a>
+        <a class="page-link" href="/feed.xml">RSS feed</a>
+        <a class="page-link" href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">Discuss</a>
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Human Learning What WaveNet Learned from Humans</h1>
+
+    <p class="post-meta"><time datetime="2016-09-23T17:00:00+00:00" itemprop="datePublished">Sep 23, 2016</time>
+     •
+      
+        Sageev Oore
+      
+      
+        (<a href="https://github.com/osageev"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">osageev</span></a>
+)
+      
+    </span>
+    </span></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>(or Learning Music Learned From Music)</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xTVwYFpK5Mo" frameborder="0" allowfullscreen=""></iframe>
+
+<p>A few days ago, DeepMind posted audio synthesis results that included .wav files
+generated from a training data set of hours of solo piano music. Each wave file
+(near the bottom of
+<a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">their post</a>) is 10 seconds long,
+and sounds very much like piano music.
+I took a closer look at these samples.</p>
+
+<!--more-->
+
+<p>Musically, I found the clips fascinating to listen to and in
+particular, before even knowing anything about the training data itself, they
+made me curious about it— curious both as a machine learning researcher, and
+also as a musician. For example, many moments in the synthesized examples
+reminded me of Russian composers such as
+<a href="https://en.wikipedia.org/wiki/Alexander_Skryabin">Skryabin</a>… why was this? One way that
+scientists learn is by trying to replicate what other scientists have done;
+similarly, one way that musicians learn is by trying to replicate what other
+musicians have created. So, in order to better understand what was going on in
+these sounds, I started learning to play some of the clips by ear on piano (this
+is sometimes called <i>lifting</i>). I made the above video while working on WaveNet’s
+piano sample #3.
+(Disclaimer: this was done quickly—
+transcribing well is usually very time intensive— and roughly, with various
+inaccuracies, both at the note level but at other levels as well.) It is just a
+musical outline of the corresponding clip. The last couple of seconds are a bit
+of improvising I did just at that moment to continue the otherwise cut-off
+phrase.</p>
+
+<p>I later recorded another variation of the same clip, this time on my electric keyboard, so that I could
+include a <a href="/assets/sageev_transcription.mid">MIDI file</a>
+for you to download as well.</p>
+
+<iframe width="100%" height="394" src="https://musescore.com/user/12437891/scores/2659601/embed" frameborder="0" allowfullscreen=""></iframe>
+<p><small>This is the score generated by MuseScore when fed the raw MIDI file. The rhythm
+is wrong and pedaling is absent, but you get to see the notes.</small></p>
+
+<p>Learning this clip led me to a few observations:</p>
+<ul>
+<li>contours of the dynamics sound extremely smooth— both unnatural and at the same
+time musically extremely effective (reminds me of the incredible control of a
+pianist like Horowitz)</li>
+<li>the notes are generally locally “playable” (I just mean this coarsely, i.e. it is
+possible to press those notes all at the same time). why? the data is from
+humans playing piano, so in any brief time interval (e.g. the input window
+size), the sample is itself playable, and so an accurate generative model of
+this data would likely also be playable if one looks at any similar-sized time
+window</li>
+<li>at least one exception to playability is in “textures”: there are moments where
+(to my ears) there is a “sound” of piano but without clear beginnings of notes;
+this could be happening for a variety of reasons; for now, I “musically
+outlined” this effect by playing something suggestive of the texture that I was
+hearing (i.e. a perceptual approximation)</li>
+<li>musically speaking, those non-piano sounds are some of the most interesting
+sounds for me</li>
+<li>it’s quite hard to play at the speed and with the smoothness of the recording.
+one reason is that while the notes themselves are generally locally playable,
+the transitions between sections are fast, frequent and furious, even within
+each 10-second clip: that’s not easy to play!</li>
+</ul>
+
+<p>I hope these short notes provide some clues and ideas for how to further play with
+this fun generative model. Please feel free to add your own
+observations/insights/questions/transcriptions/etc. We are interested in
+building new tools for creative people and collaborating with the artistic
+community; if you have ideas of how such a collaboration might look, at least
+from your end, please feel free to comment on the Magenta
+<a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">discussion
+list</a>
+or contact me directly.</p>
+
+<p>–Sageev</p>
+
+<p><i><a href="http://www.cs.smu.ca/~sageev">Sageev Oore</a>, a visiting machine learning researcher on the Magenta team at
+<a href="https://research.google.com/teams/brain/">Google Brain</a>, is a professor in the Dept of Math &amp; Computer Science at Saint
+Mary’s University (Halifax, Canada), and records and performs as a musician.</i></p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>

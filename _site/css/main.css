@@ -149,131 +149,67 @@ pre {
  * Site header
  */
 .site-header {
-  border-top: 1px solid #e8e8e8;
+  border-top: 5px solid #424242;
   border-bottom: 1px solid #e8e8e8;
-  min-height: 30px;
+  min-height: 56px;
   position: relative; }
 
 .site-title {
   font-size: 24px;
   font-weight: 300;
   color: #111;
-  line-height: 56px;
+  line-height: 80px;
   letter-spacing: -1px;
   margin-bottom: 0;
   vertical-align: baseline;
   float: left; }
-
-.site-title, .site-title:visited {
-  color: #111; }
+  .site-title, .site-title:visited {
+    color: #111; }
 
 .site-nav {
   float: right;
-  line-height: 75px; }
-
-.site-nav .menu-icon {
-  display: none; }
-
-.site-nav .page-link {
-  color: #ffffff;
-  line-height: 1.5; }
-
-.site-nav .page-link:not(:last-child) {
-  margin-right: 20px; }
-
-@media screen and (max-width: 600px) {
-  .site-nav {
-    position: absolute;
-    top: 9px;
-    right: 15px;
-    background-color: #fdfdfd;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-    text-align: right; }
-
+  line-height: 56px; }
   .site-nav .menu-icon {
-    display: block;
-    float: right;
-    width: 36px;
-    height: 26px;
-    line-height: 0;
-    padding-top: 10px;
-    text-align: center; }
-
-  .site-nav .menu-icon > svg {
-    width: 18px;
-    height: 15px; }
-
-  .site-nav .menu-icon > svg path {
-    fill: #424242; }
-
-  .site-nav .trigger {
-    clear: both;
     display: none; }
-
-  .site-nav:hover .trigger {
-    display: block;
-    padding-bottom: 5px; }
-
   .site-nav .page-link {
-    display: block;
-    padding: 5px 10px;
     color: #111;
-    margin-left: 20px; }
-
-  .site-nav .page-link:not(:last-child) {
-    margin-right: 0; } }
-.top-thingy {
-  background-color: transparent;
-  position: absolute;
-  width: 100%; }
-
-.top-thingy .container {
-  padding: 0 5px; }
-
-.hero-full {
-  height: 500px;
-  background-position: center center;
-  background-size: cover; }
-
-.hero-thin {
-  height: 75px;
-  background-position: center center;
-  background-size: cover; }
-
-button,
-a.button {
-  display: inline-block;
-  margin-top: 370px;
-  margin-left: -webkit-calc(45%);
-  padding: 11.25px 20px 10.5px 20px;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border-radius: 2px;
-  font-family: 'Roboto', Helvetica, sans-serif;
-  font-size: .875rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.23s; }
-
-button.button-transparent,
-a.button-transparent {
-  font-weight: 400;
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff; }
-
-button.button-transparent:hover,
-a.button-transparent:hover {
-  background: #fff;
-  color: #6fc9c6;
-  font-weight: 500; }
+    line-height: 1.5; }
+    .site-nav .page-link:not(:last-child) {
+      margin-right: 20px; }
+  @media screen and (max-width: 600px) {
+    .site-nav {
+      position: absolute;
+      top: 9px;
+      right: 15px;
+      background-color: #fdfdfd;
+      border: 1px solid #e8e8e8;
+      border-radius: 5px;
+      text-align: right; }
+      .site-nav .menu-icon {
+        display: block;
+        float: right;
+        width: 36px;
+        height: 26px;
+        line-height: 0;
+        padding-top: 10px;
+        text-align: center; }
+        .site-nav .menu-icon > svg {
+          width: 18px;
+          height: 15px; }
+          .site-nav .menu-icon > svg path {
+            fill: #424242; }
+      .site-nav .trigger {
+        clear: both;
+        display: none; }
+      .site-nav:hover .trigger {
+        display: block;
+        padding-bottom: 5px; }
+      .site-nav .page-link {
+        display: block;
+        padding: 5px 10px;
+        margin-left: 20px; }
+        .site-nav .page-link:not(:last-child) {
+          margin-right: 0; } }
 
 /**
  * Site footer
