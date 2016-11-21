@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Magenta</title>
+  <meta name="description" content="Magenta is a project devoted to music and art generation with machine intelligence. It is part of TensorFlow, an open source machine learning library.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://magenta.tensorflow.org/page2/">
+  <link rel="alternate" type="application/rss+xml" title="Magenta" href="https://magenta.tensorflow.org/feed.xml">
+  <script src="//www.google.com/js/gweb/analytics/autotrack.js"></script>
+  <script>
+  new gweb.analytics.AutoTrack({
+    profile: 'UA-80107903-1'
+  });
+  </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+    <a class="site-title" href="/"><span class="site-title"><img src="/assets/magenta-logo.png" height=75></span>
+</a -->
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        <a class="page-link" href="https://www.github.com/tensorflow/magenta">GitHub</a>
+        <a class="page-link" href="/feed.xml">RSS feed</a>
+        <a class="page-link" href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">Discuss</a>
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="home">
+  <ul class="post-list">
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/10/10/coconet/">Coconet: Counterpoint by Convolution</a>
+        </h2>
+        <span class="post-meta">Oct 10, 2016</span>
+       
+        <p>Recently, WaveNet showed that we can generate music on the waveform level
+sample by sample, and also time travel from romantic nocturnes to atonal
+bombastic mysticism in seconds.  Surprisingly, this was achieved not by RNNs,
+but CNNs, demonstrating that they can also successfully capture short and long
+term structure in sequential data such as speech and music audio.</p>
+
+<p>Here, we introduce, CocoNet, where we use convolutions to model counterpoint
+in music on the symbolic level, treating music as multiple simultaneous
+sequences.  We aim to generate music with a sense of flow, phrasing and
+coherence that spans over a minute by conditioning on the long-term structure of
+existing Bach chorales, by rewriting them voice by voice until all parts are
+generated.  We frame this music generation problem as an inpainting task, where
+we (learn to) generate by conditioning on arbitrary context.  This frees us from
+needing to generate in a chronological order (such as in RNNs), which can be too
+constraining for symbolic music generation.</p>
+
+
+        Read <a class="post-full-link" href="/2016/10/10/coconet/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/09/23/learning-music-from-learned-music/">Human Learning What WaveNet Learned from Humans</a>
+        </h2>
+        <span class="post-meta">Sep 23, 2016</span>
+        •
+         
+           Sageev Oore
+         
+         
+           (<a href="https://github.com/osageev"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">osageev</span></a>
+)
+         
+        
+        <p>(or Learning Music Learned From Music)</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xTVwYFpK5Mo" frameborder="0" allowfullscreen=""></iframe>
+
+<p>A few days ago, DeepMind posted audio synthesis results that included .wav files
+generated from a training data set of hours of solo piano music. Each wave file
+(near the bottom of
+<a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">their post</a>) is 10 seconds long,
+and sounds very much like piano music.
+I took a closer look at these samples.</p>
+
+
+        Read <a class="post-full-link" href="/2016/09/23/learning-music-from-learned-music/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/08/02/midi-interface/">Magenta MIDI Interface</a>
+        </h2>
+        <span class="post-meta">Aug 2, 2016</span>
+        •
+         
+           Adam Roberts
+         
+         
+           (<a href="https://github.com/adarob"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">adarob</span></a>
+)
+         
+        
+        <p>The magenta team is happy to announce our first step toward providing an easy-to-use
+interface between musicians and TensorFlow. This release makes it
+possible to connect a TensorFlow model to a MIDI controller and synthesizer in
+real time.</p>
+
+<p>Don’t have your own MIDI keyboard? There are many free software
+components you can download and use with our interface. Find out more details on
+setting up your own TensorFlow-powered MIDI rig in the
+<a href="https://github.com/tensorflow/magenta/tree/master/magenta/interfaces/midi/README.md">README</a>.</p>
+
+
+        Read <a class="post-full-link" href="/2016/08/02/midi-interface/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/07/15/lookback-rnn-attention-rnn/">Generating Long-Term Structure in Songs and Stories</a>
+        </h2>
+        <span class="post-meta">Jul 15, 2016</span>
+        •
+         
+           Elliot Waite
+         
+         
+           (<a href="https://github.com/elliotwaite"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">elliotwaite</span></a>
+)
+         
+        
+        <p>One of the difficult problems in using machine learning to generate sequences, such as melodies, is creating long-term structure. Long-term structure comes very naturally to people, but it’s very hard for machines. Basic machine learning systems can generate a short melody that stays in key, but they have trouble generating a longer melody that follows a chord progression, or follows a multi-bar song structure of verses and choruses. Likewise, they can produce a screenplay with grammatically correct sentences, but not one with a compelling plot line. Without long-term structure, the content produced by recurrent neural networks (RNNs) often seems wandering and random.</p>
+
+<p>But what if these RNN models could recognize and reproduce longer-term structure?</p>
+
+
+        Read <a class="post-full-link" href="/2016/07/15/lookback-rnn-attention-rnn/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/07/11/mami/">Music, Art and Machine Intelligence (MAMI) Conference</a>
+        </h2>
+        <span class="post-meta">Jul 11, 2016</span>
+        •
+         
+           Adam Roberts
+         
+         
+           (<a href="https://github.com/adarob"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">adarob</span></a>
+)
+         
+        
+        <p>This past June, Magenta, in parternship with the
+<a href="https://ami.withgoogle.com">Artists and Machine Intelligence</a> group, hosted
+the Music, Art and Machine Intelligence (MAMI) Conference in San Francisco.
+MAMI brought together artists and researchers to share their work and explore
+new ideas in the burgeoning space intersecting art and machine learning.</p>
+
+
+        Read <a class="post-full-link" href="/2016/07/11/mami/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/06/29/reading-list/">Reading List</a>
+        </h2>
+        <span class="post-meta">Jun 29, 2016</span>
+        •
+         
+           Cinjon Resnick
+         
+         
+           (<a href="https://github.com/cinjon"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">cinjon</span></a>
+)
+         
+        
+        <p>Magenta’s primary goal is to push the envelope forward in research on music and art generation. Another goal of ours is to teach others about that research. This includes disseminating important works in the field in one place, a resource that if curated, will be valuable to the community for years to come.</p>
+
+
+        Read <a class="post-full-link" href="/2016/06/29/reading-list/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/2016/06/10/recurrent-neural-network-generation-tutorial/">A Recurrent Neural Network Music Generation Tutorial</a>
+        </h2>
+        <span class="post-meta">Jun 10, 2016</span>
+        •
+         
+           Dan Abolafia
+         
+         
+           (<a href="https://github.com/danabo"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">danabo</span></a>
+)
+         
+        
+        <p>We are excited to release our first
+<a href="https://github.com/tensorflow/magenta/tree/master/magenta/models/basic_rnn">tutorial model</a>,
+a recurrent neural network that generates music. It serves as an end-to-end primer on how to build
+a recurrent network in <a href="https://www.tensorflow.org">TensorFlow</a>. It also
+demonstrates a sampling of what’s to come in Magenta. In addition, we are
+releasing code that converts MIDI files to a format that TensorFlow can
+understand, making it easy to create training datasets from any collection of
+MIDI files.</p>
+
+
+        Read <a class="post-full-link" href="/2016/06/10/recurrent-neural-network-generation-tutorial/">full post</a>.
+      </li>
+    
+      
+      <li>
+        <h2>
+          <a class="post-link" href="/welcome-to-magenta">Welcome to Magenta!</a>
+        </h2>
+        <span class="post-meta">Jun 1, 2016</span>
+        •
+         
+           <a href=http://research.google.com/pubs/author39086.html>Douglas Eck</a>
+         
+         
+           (<a href="https://github.com/douglaseck"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">douglaseck</span></a>
+)
+         
+        
+        <p>We’re happy to announce Magenta, a project from the <a href="https://research.google.com/teams/brain/">Google Brain
+team</a> that asks: Can we use
+machine learning to create compelling art and music? If so, how? If
+not, why not?  We’ll use <a href="https://www.tensorflow.org">TensorFlow</a>, and
+we’ll release our models and tools in open source on our GitHub. We’ll
+also post demos, tutorial blog postings and technical papers. Soon
+we’ll begin accepting code contributions from the community at
+large. If you’d like to keep up on Magenta as it grows, you can follow
+us on our <a href="https://github.com/tensorflow/magenta">GitHub</a> and join our
+<a href="https://groups.google.com/a/tensorflow.org/forum/#!forum/magenta-discuss">discussion
+group</a>.</p>
+
+
+        Read <a class="post-full-link" href="/welcome-to-magenta">full post</a>.
+      </li>
+    
+  </ul>
+
+</div>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>
