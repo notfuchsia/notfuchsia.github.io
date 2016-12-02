@@ -58,7 +58,7 @@ figure > img {
 }
 
 figcaption {
-	font-size: $small-font-size;
+  font-size: $small-font-size;
 }
 
 
@@ -67,14 +67,14 @@ figcaption {
  * Lists
  */
 ul, ol {
-	margin-left: $spacing-unit;
+  margin-left: $spacing-unit;
 }
 
 li {
-	> ul,
-	> ol {
-		margin-bottom: 0;
-	}
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
 }
 
 
@@ -92,17 +92,17 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-	color: $brand-color;
-	text-decoration: none;
+  color: $brand-color;
+  text-decoration: none;
 
-	&:visited {
-		color: darken($brand-color, 15%);
-	}
+  &:visited {
+    color: darken($brand-color, 15%);
+  }
 
-	&:hover {
+  &:hover {
     color: $text-color;
     text-decoration: underline;
-	}
+  }
 }
 
 
@@ -119,7 +119,7 @@ blockquote {
   font-style: italic;
 
   > :last-child {
-		margin-bottom: 0;
+    margin-bottom: 0;
   }
 }
 
