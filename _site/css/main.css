@@ -11,7 +11,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 300 16px/1.5 Helvetica, Arial, sans-serif;
+  font: 300 16px/1.5 "Roboto", sans-serif;
   color: #111;
   background-color: #fdfdfd;
   -webkit-font-smoothing: antialiased;
@@ -159,7 +159,6 @@ pre {
   font-weight: 300;
   color: #111;
   line-height: 56px;
-  letter-spacing: -1px;
   margin-bottom: 0;
   vertical-align: baseline;
   float: left; }
@@ -223,12 +222,12 @@ pre {
 
   .site-nav .page-link:not(:last-child) {
     margin-right: 0; } }
-.top-thingy {
+.top-bar {
   background-color: transparent;
   position: absolute;
   width: 100%; }
 
-.top-thingy .container {
+.top-bar .container {
   padding: 0 5px; }
 
 .hero-full {
@@ -236,18 +235,33 @@ pre {
   background-position: center center;
   background-size: cover; }
 
+.logo-bottom-text img {
+  max-height: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.logo-bottom-text {
+  text-align: center;
+  font-size: 30px;
+  color: #6fc9c6; }
+
 .hero-thin {
   height: 75px;
   background-position: center center;
   background-size: cover; }
 
-button,
-a.button {
-  display: inline-block;
-  margin-top: 370px;
-  margin-left: -webkit-calc(45%);
+.get-started {
+  display: block;
+  width: 100px;
+  margin: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   padding: 11.25px 20px 10.5px 20px;
-  border: none;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -255,24 +269,25 @@ a.button {
   -o-appearance: none;
   appearance: none;
   border-radius: 2px;
-  font-family: 'Roboto', Helvetica, sans-serif;
   font-size: .875rem;
+  font-weight: 400;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.23s; }
+  transition: all 0.5s; }
 
-button.button-transparent,
-a.button-transparent {
-  font-weight: 400;
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff; }
-
-button.button-transparent:hover,
-a.button-transparent:hover {
+.get-started:hover {
   background: #fff;
   color: #6fc9c6;
+  font-weight: 500; }
+  .get-started:hover:visited {
+    background: #fff;
+    color: #6fc9c6;
+    font-weight: 500; }
+
+.get-started:visited {
+  background: #fff;
+  color: #fff;
   font-weight: 500; }
 
 /**
