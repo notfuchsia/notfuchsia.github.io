@@ -89,7 +89,11 @@
 
 	.site-nav .page-link:not(:last-child) {
 		margin-right: 0;
-	} 
+	}
+
+  .logo-bottom-text {
+    margin-top: 30px;
+  }
 }
 
 .top-bar {
@@ -130,7 +134,7 @@
 .get-started {
   display: block;
 	width: 100px;
-	margin: 25px;
+	margin-top: 25px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -139,11 +143,6 @@
   background: transparent;
   border: 1px solid #fff;
   outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
   border-radius: 2px;
   font-size: .875rem;
   font-weight: 400;
@@ -170,75 +169,6 @@
   color: #fff;
   font-weight: 500;
 }
-
-/**
- * Site footer
- */
-.site-footer {
-	border-top: 1px solid $grey-color-light;
-  padding: $spacing-unit 0;
-}
-
-.footer-heading {
-  font-size: 18px;
-  margin-bottom: $spacing-unit / 2;
-}
-
-.contact-list,
-.social-media-list {
-	list-style: none;
-	margin-left: 0;
-}
-
-.footer-col-wrapper {
-	font-size: 15px;
-  color: $grey-color;
-  margin-left: -$spacing-unit / 2;
-  @extend %clearfix;
-}
-
-.footer-col {
-  float: left;
-  margin-bottom: $spacing-unit / 2;
-  padding-left: $spacing-unit / 2;
-}
-
-.footer-col-1 {
-  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-  width:         calc(35% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-2 {
-  width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-  width:         calc(20% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-3 {
-  width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-  width:         calc(45% - (#{$spacing-unit} / 2));
-}
-
-@include media-query($on-laptop) {
-  .footer-col-1,
-  .footer-col-2 {
-    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    width:         calc(50% - (#{$spacing-unit} / 2));
-  }
-
-  .footer-col-3 {
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width:         calc(100% - (#{$spacing-unit} / 2));
-  }
-}
-
-@include media-query($on-palm) {
-  .footer-col {
-		float: none;
-		width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-		width:         calc(100% - (#{$spacing-unit} / 2));
-	}
-}
-
 
 
 /**
