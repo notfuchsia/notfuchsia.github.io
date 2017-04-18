@@ -141,6 +141,10 @@ These insights are not novel at all, but they didn't feel concrete until I perso
 
 As for audio, I never obtained decent samples except when overfitting to a single short example. I have become skeptical of the quantized waveform representation. Replacing a real-valued mixture-of-Gaussians output model with a softmax in many ways eases optimization and avoids failure modes where the model tries to cover multiple modes with a single mode. However it makes it awkward to represent the signal as a sum of signals, in other words to exploit the superposition principle. On the other hand, WaveNet ([Van Den Oord et al. 2016](https://arxiv.org/abs/1609.03499)) and SampleRNN ([Mehri et al. 2016](https://arxiv.org/abs/1612.07837)) use the same representation, successfully.
 
+### Acknowledgements
+
+I'm grateful to the entire Magenta team but particularly my hosts Fred Bertsch and Douglas Eck, and co-conspirators Anna Huang, Natasha Jaques and Kyle Kastner. Further thanks go to Brain members George Dahl, Eugene Brevdo and David Bieber for helpful discussions. Finally, I thank Aaron Courville for advice, and Alex Lamb for proofreading.
+
 ### References
 
 [Chen et al. 2016. *Training Deep Nets with Sublinear Memory Cost*](https://arxiv.org/abs/1604.06174)
