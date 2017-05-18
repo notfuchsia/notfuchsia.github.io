@@ -14,9 +14,9 @@ Generative modeling is hard by itself, too. Consider images. It's easy enough to
 
 The blurring issue is particularly apparent in the domain of images, but is a general characteristic of models trained to place high probability on training examples (i.e. maximum-likelihood). These models are punished harshly for putting low probability on even a single training data point, and as a result they spread their probability widely, producing generative distributions with high entropy. There is no counteracting incentive not to place probability on regions that don't correspond to natural images.
 
-Generative Adversarial Networks do have this counteracting incentive. GANs are trained not to produce particular outputs, but to match their generative distribution to the distribution that the training data came from, in such a way that an adversarial discriminator can't tell generated examples from training examples. Unfortunately, the adversarial training process is very unstable; currently, GANs basically do not work.
+Generative Adversarial Networks do have this counteracting incentive. GANs are trained not to produce particular outputs, but to match their generative distribution to the distribution that the training data came from, in such a way that an adversarial discriminator can't tell generated examples from training examples. Unfortunately, the adversarial training process is very unstable; GANs are currently unreliable.
 
-Under a maximum-likelihood objective, it is very difficult to get a model to focus on individual modes. Euclidean distance exacerbates this; it corresponds to treating the output of the model as the mean of a unimodal Gaussian with identity covariance. To encourage the model to break down the generative distribution into modes, it has recently become popular to quantize real-valued outputs and use a softmax output with cross-entropy loss instead. Although disgusting at first sight, the softmax approach is nice because it allows the model to represent arbitrarily shaped distributions.
+Under a maximum-likelihood objective, it is very difficult to get a model to focus on individual modes. Euclidean distance exacerbates this; it corresponds to treating the output of the model as the mean of a unimodal Gaussian with identity covariance. To encourage the model to break down the generative distribution into modes, it has recently become popular to quantize real-valued outputs and use a softmax output with cross-entropy loss instead. Although it feels wrong, the softmax approach is nice because it allows the model to represent arbitrarily shaped distributions.
 
 Furthermore, modeling high-dimensional distributions becomes dramatically easier when the joint probability is broken up into autoregressive factors. There are many ways to do this. For sequences, chronological factorization is obvious and popular, in which the problem of modeling $p(x_1, x_2 \ldots x_n)$ is broken up into the subproblems of modeling $p(x_1), p(x_2 | x_1), p(x_3 | x_2, x_1)$ and $p(x_n | x_{n-1} \ldots x_2, x_1)$. In order to be able to generalize to longer sequences we assume the conditional distributions are all equal, i.e. there is some stationary conditional distribution $p(x_i | x_{<i})$ that we will model instead.
 
@@ -41,7 +41,7 @@ Backpropagation is easily adapted to recurrent neural networks by "unrolling" th
 <figcaption>Image by Chris Olah, taken from <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs">here</a>.</figcaption>
 </figure>
 
-For autoregressive recurrent neural networks, we ideally want to run the model over one long sequence $x$ of examples $x_i | x_{<i}$. Examples of autoregressive tasks are language modeling tasks such as Penn Treebank and Wikipedia, where the model processes a sequence of characters or words one at a time and at each step predicts the next character/word. However, because of the $O(n)$ growth of memory usage, it is not feasible to compute gradient all the way back to the beginning of the sequence. Instead, it is customary to put a hard limit on the number of steps to run backwards. In practice this is implemented by slicing the long sequence into shorter subsequences and carrying over the model's hidden state from one subsequence to the next. Typical subsequence length is anywhere from 50 to 1000 and is chosen to trade off minibatch size, number of hidden units and backpropagation length.
+For autoregressive recurrent neural networks, we ideally want to run the model over one long sequence $x$ of examples $x_i | x_{<i}$. Examples of autoregressive tasks are language modeling tasks such as Penn Treebank ([Marcus et al. 1993](http://dl.acm.org/citation.cfm?id=972475)) and Wikipedia ([Mahoney 2006](http://mattmahoney.net/dc/text)), where the model processes a sequence of characters or words one at a time and at each step predicts the next character/word. However, because of the $O(n)$ growth of memory usage, it is not feasible to compute gradient all the way back to the beginning of the sequence. Instead, it is customary to put a hard limit on the number of steps to run backwards. In practice this is implemented by slicing the long sequence into shorter subsequences and carrying over the model's hidden state from one subsequence to the next. Typical subsequence length is anywhere from 50 to 1000 and is chosen to trade off minibatch size, number of hidden units and backpropagation length.
 
 The following animation shows a gradient computation graph for a two-layer recurrent neural network:
 
@@ -147,19 +147,22 @@ I'm grateful to the entire Magenta team but particularly my hosts Fred Bertsch a
 
 ### References
 
-[Chen et al. 2016. *Training Deep Nets with Sublinear Memory Cost*](https://arxiv.org/abs/1604.06174)  
-[Chung et al. 2016. *Hierarchical Multiscale Recurrent Neural Networks*](https://arxiv.org/abs/1609.01704)  
-[Dauvergne & Hascöet 2006. *The Data-Flow Equations of Checkpointing in reverse Automatic Differentiation*](https://www-sop.inria.fr/tropics/papers/DauvergneHascoet06.pdf)  
-[El Hihi & Bengio 1995. *Hierarchical Recurrent Neural Networks for Long-Term Dependencies*](https://papers.nips.cc/paper/1102-hierarchical-recurrent-neural-networks-for-long-term-dependencies.pdf)  
-[Gruslys et al. 2016. *Memory-Efficient Backpropagation Through Time*](https://arxiv.org/abs/1606.03401)  
-[Koutník et al. 2014. *A Clockwork RNN*](https://arxiv.org/abs/1402.3511)  
-[Ollivier et al. 2015. *Training recurrent networks online without backtracking*](https://arxiv.org/abs/1507.07680)  
-[Schmidhuber 1992. *Learning Complex, Extended Sequences Using the Principle of History Compression*](ftp://ftp.idsia.ch/pub/juergen/chunker.pdf)  
-[Mikolov et al. 2012. *Subword Language Modeling with Neural Networks*](http://www.fit.vutbr.cz/~imikolov/rnnlm/char.pdf)  
-[Hochreiter 1991. *Untersuchungen zu dynamischen neuronalen Netzen*](http://people.idsia.ch/~juergen/SeppHochreiter1991ThesisAdvisorSchmidhuber.pdf)  
-[Bengio et al. 1994. *Learning Long-Term Dependencies with Gradient Descent is Difficult*](http://www.dsi.unifi.it/~paolo/ps/tnn-94-gradient.pdf)  
-[Gers 2001. *Long Short-Term Memory in Recurrent Neural Networks*](http://www.felixgers.de/papers/phd.pdf)  
-[Pascanu et al. 2012. *On the difficulty of training Recurrent Neural Networks*](https://arxiv.org/abs/1211.5063)  
-[Martens 2016. *Second-order Optimization for Neural Networks*](http://www.cs.toronto.edu/~jmartens/docs/thesis_phd_martens.pdf)  
-[Van Den Oord et al. 2016. *WaveNet: A Generative Model for Raw Audio*](https://arxiv.org/abs/1609.03499)  
+[Bengio et al. 1994. *Learning Long-Term Dependencies with Gradient Descent is Difficult*](http://www.dsi.unifi.it/~paolo/ps/tnn-94-gradient.pdf)
+[Chen et al. 2016. *Training Deep Nets with Sublinear Memory Cost*](https://arxiv.org/abs/1604.06174)
+[Chung et al. 2016. *Hierarchical Multiscale Recurrent Neural Networks*](https://arxiv.org/abs/1609.01704)
+[Dauvergne & Hascöet 2006. *The Data-Flow Equations of Checkpointing in reverse Automatic Differentiation*](https://www-sop.inria.fr/tropics/papers/DauvergneHascoet06.pdf)
+[El Hihi & Bengio 1995. *Hierarchical Recurrent Neural Networks for Long-Term Dependencies*](https://papers.nips.cc/paper/1102-hierarchical-recurrent-neural-networks-for-long-term-dependencies.pdf)
+[Gers 2001. *Long Short-Term Memory in Recurrent Neural Networks*](http://www.felixgers.de/papers/phd.pdf)
+[Gruslys et al. 2016. *Memory-Efficient Backpropagation Through Time*](https://arxiv.org/abs/1606.03401)
+[Hochreiter 1991. *Untersuchungen zu dynamischen neuronalen Netzen*](http://people.idsia.ch/~juergen/SeppHochreiter1991ThesisAdvisorSchmidhuber.pdf)
+[Koutník et al. 2014. *A Clockwork RNN*](https://arxiv.org/abs/1402.3511)
+[Mahoney 2006. *Large Text Compression Benchmark*](http://mattmahoney.net/dc/text)
+[Marcus et al. 1993. *Building a large annotated corpus of English: the Penn Treebank*](http://dl.acm.org/citation.cfm?id=972475)
+[Martens 2016. *Second-order Optimization for Neural Networks*](http://www.cs.toronto.edu/~jmartens/docs/thesis_phd_martens.pdf)
 [Mehri et al. 2016. *SampleRNN: An Unconditional End-to-End Neural Audio Generation Model*](https://arxiv.org/abs/1612.07837)
+[Mikolov et al. 2012. *Subword Language Modeling with Neural Networks*](http://www.fit.vutbr.cz/~imikolov/rnnlm/char.pdf)
+[Ollivier et al. 2015. *Training recurrent networks online without backtracking*](https://arxiv.org/abs/1507.07680)
+[Pascanu et al. 2012. *On the difficulty of training Recurrent Neural Networks*](https://arxiv.org/abs/1211.5063)
+[Schmidhuber 1992. *Learning Complex, Extended Sequences Using the Principle of History Compression*](ftp://ftp.idsia.ch/pub/juergen/chunker.pdf)
+[Van Den Oord et al. 2016. *WaveNet: A Generative Model for Raw Audio*](https://arxiv.org/abs/1609.03499)
+
